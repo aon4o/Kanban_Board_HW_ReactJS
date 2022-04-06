@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/canban_board.iml" filepath="$PROJECT_DIR$/.idea/canban_board.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kanban_board/.idea/kanban_board.iml" filepath="$PROJECT_DIR$/../kanban_board/.idea/kanban_board.iml" />
     </modules>
   </component>
 </project>
