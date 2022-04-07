@@ -4,16 +4,25 @@ import Nav from "react-bootstrap/Nav";
 import {LinkContainer} from 'react-router-bootstrap'
 import {useContext} from "react";
 import authContext from "../../utils/authContext";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router";
 
 const NavBar = () => {
-    const Auth = useContext(authContext);
+    const auth = useContext(authContext);
+    const navigate = useNavigate();
+
+    const logout = () => {
+        auth.setUsername('');
+        toast.success("You logged out successfully!");
+        navigate('/');
+    }
 
     return (
         <>
             <Navbar id={'navbar'} expand="lg" variant={"dark"}>
                 <Container id={'navbar-container'} className={'bg-primary shadow-lg-mine mt-3 px-3 py-2 rounded-3 border-3 border-primary'}>
                     <LinkContainer to="/">
-                        <Navbar.Brand>ELSYS Helper</Navbar.Brand>
+                        <Navbar.Brand>Kanban Board</Navbar.Brand>
                     </LinkContainer>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,7 +30,7 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav" className={"d-flex justify-content-end"}>
                         <Nav className="align-self-end">
 
-                            {Auth.scope === 'user' || Auth.scope === 'admin' ?
+                            {auth.username ?
                                 <>
                                     <LinkContainer to="/classes">
                                         <Nav.Link>Класове</Nav.Link>
@@ -43,20 +52,20 @@ const NavBar = () => {
                                 <></>
                             }
 
-                            {Auth.auth ?
+                            {auth.username ?
                                 <>
                                     <LinkContainer to="/users/me" className={'ms-5'}>
-                                        <Nav.Link>Профил</Nav.Link>
+                                        <Nav.Link>Profile</Nav.Link>
                                     </LinkContainer>
-                                    <Nav.Link>Изход</Nav.Link>
+                                    <Nav.Link onClick={logout}>Log Out</Nav.Link>
                                 </>
                                 :
                                 <>
                                     <LinkContainer to="/login" className={'ms-5'}>
-                                        <Nav.Link>Вход</Nav.Link>
+                                        <Nav.Link>Log In</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="/register">
-                                        <Nav.Link>Регистрация</Nav.Link>
+                                        <Nav.Link>Register</Nav.Link>
                                     </LinkContainer>
                                 </>
                             }
