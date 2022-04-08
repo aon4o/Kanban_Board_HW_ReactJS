@@ -12,7 +12,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const logout = () => {
-        auth.setUsername('');
+        auth.setUser(undefined);
         toast.success("You logged out successfully!");
         navigate('/');
     }
@@ -30,31 +30,19 @@ const NavBar = () => {
                     <Navbar.Collapse id="basic-navbar-nav" className={"d-flex justify-content-end"}>
                         <Nav className="align-self-end">
 
-                            {auth.username ?
+                            {auth.user ?
                                 <>
-                                    <LinkContainer to="/classes">
-                                        <Nav.Link>Класове</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/subjects">
-                                        <Nav.Link>Предмети</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/users">
-                                        <Nav.Link>Потребители</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/discord" className={'ms-5'}>
-                                        <Nav.Link>Discord Bot</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/instructions">
-                                        <Nav.Link>Инструкции</Nav.Link>
+                                    <LinkContainer to="/boards">
+                                        <Nav.Link>Boards</Nav.Link>
                                     </LinkContainer>
                                 </>
                                 :
                                 <></>
                             }
 
-                            {auth.username ?
+                            {auth.user ?
                                 <>
-                                    <LinkContainer to="/users/me" className={'ms-5'}>
+                                    <LinkContainer to="/profile" className={'ms-5'}>
                                         <Nav.Link>Profile</Nav.Link>
                                     </LinkContainer>
                                     <Nav.Link onClick={logout}>Log Out</Nav.Link>

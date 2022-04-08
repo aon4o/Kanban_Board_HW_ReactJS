@@ -26,7 +26,7 @@ const Home = () => {
                 throw new Error("Wrong Password");
             }
 
-            auth.setUsername(username);
+            auth.setUser(user);
             toast.success(`You successfully logged in as '${username}'`);
             navigate('/');
         } catch (error) {
