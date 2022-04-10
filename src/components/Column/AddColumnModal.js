@@ -31,6 +31,7 @@ const AddColumnModal = (props) => {
             });
 
             toast.success(`Column '${columnName}' added successfully!`);
+            props.rerender(props.rerenderer + 1)
         } catch (error) {
             console.log(error)
             toast.error(`${error}`);
@@ -39,7 +40,7 @@ const AddColumnModal = (props) => {
 
     return (
         <>
-            <Modal {...props} centered>
+            <Modal show={props.show} className={props.className} centered>
                 <Form onSubmit={createBoard}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add a Column</Modal.Title>

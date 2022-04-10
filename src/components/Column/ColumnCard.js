@@ -4,13 +4,14 @@ import {FaArrowLeft, FaArrowRight, FaEdit, FaPlus, FaTrash} from "react-icons/fa
 import {useEffect, useState} from "react";
 import AddCardModal from "../Card/AddCardModal";
 import CardCard from "../Card/CardCard";
-import {toast} from "react-toastify";
+import DeleteColumnModal from "./DeleteColumnModal";
 
 
 const ColumnCard = (props) => {
 
-    const [addCardShow, setAddCardShow] = useState(false);
     const [cards, setCards] = useState();
+    const [addCardModalShow, setAddCardModalShow] = useState(false);
+    const [deleteColumnModalShow, setDeleteColumnModalShow] = useState(false);
 
     useEffect(() => {
         db.cards.where({column_id: props.column.id}).toArray()
@@ -18,7 +19,7 @@ const ColumnCard = (props) => {
     }, [props.column.id])
 
     const addCard = () => {
-        setAddCardShow(true)
+        setAddCardModalShow(true);
     }
 
     const moveColumnLeft = () => {
@@ -33,15 +34,8 @@ const ColumnCard = (props) => {
 
     }
 
-    const deleteColumn = async () => {
-        try {
-            const deletedCards = await db.cards.where({column_id: props.column.id}).delete()
-            await db.columns.delete(props.column.id);
-            toast.success(`Column '${props.column.name}' deleted successfully with ${deletedCards} cards!`);
-        } catch (error) {
-            toast.error(error);
-        }
-
+    const deleteColumn = () => {
+        setDeleteColumnModalShow(true);
     }
 
     return (
@@ -82,9 +76,16 @@ const ColumnCard = (props) => {
         </Card>
 
             <AddCardModal
-                show={addCardShow}
-                onHide={() => setAddCardShow(false)}
+                show={addCardModalShow}
+                onHide={() => setAddCardModalShow(false)}
                 column_id={props.column.id}
+            />
+            <DeleteColumnModal
+                show={deleteColumnModalShow}
+                onHide={() => setDeleteColumnModalShow(false)}
+                column={props.column}
+                rerenderer={props.rerenderer}
+                rerender={props.rerender}
             />
         </>
     )

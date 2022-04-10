@@ -18,6 +18,7 @@ const Board = () => {
     const [board, setBoard] = useState();
     const [columns, setColumns] = useState();
     const [modalShow, setModalShow] = useState(false);
+    const [rerenderColumns, setRerenderColumns] = useState(0);
 
     useEffect(() => {
         if (!auth.user) {
@@ -34,8 +35,7 @@ const Board = () => {
     useEffect(() => {
         db.columns.where({board_id: board?.id}).sortBy('position')
             .then(setColumns);
-
-    }, [board, modalShow])
+    }, [board, rerenderColumns])
 
     // await db.columns.where({board_id: cards.id}).toArray()
 
@@ -56,7 +56,11 @@ const Board = () => {
                     {
                         columns?.map(column => (
                             <Col key={column.index}>
-                                <ColumnCard column={column}/>
+                                <ColumnCard
+                                    column={column}
+                                    rerenderer={rerenderColumns}
+                                    rerender={setRerenderColumns}
+                                />
                             </Col>
                         ))
                     }
@@ -68,6 +72,8 @@ const Board = () => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 board_id={board?.id}
+                rerenderer={rerenderColumns}
+                rerender={setRerenderColumns}
             />
         </>
     )
