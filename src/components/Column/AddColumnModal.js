@@ -31,7 +31,7 @@ const AddColumnModal = (props) => {
             });
 
             toast.success(`Column '${columnName}' added successfully!`);
-            props.rerender(props.rerenderer + 1)
+            props.rerender();
         } catch (error) {
             console.log(error)
             toast.error(`${error}`);

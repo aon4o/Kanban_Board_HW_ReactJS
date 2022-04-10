@@ -35,6 +35,8 @@ const AddCardModal = (props) => {
             });
 
             toast.success(`Card '${title}' added successfully!`);
+            props.rerender();
+            props.onHide();
         } catch (error) {
             console.log(error)
             toast.error(`${error}`);

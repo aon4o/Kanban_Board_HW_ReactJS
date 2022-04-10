@@ -12,11 +12,12 @@ const ColumnCard = (props) => {
     const [cards, setCards] = useState();
     const [addCardModalShow, setAddCardModalShow] = useState(false);
     const [deleteColumnModalShow, setDeleteColumnModalShow] = useState(false);
+    const [rerenderColumn, setRerenderColumn] = useState(0);
 
     useEffect(() => {
         db.cards.where({column_id: props.column.id}).toArray()
             .then(setCards);
-    }, [props.column.id])
+    }, [props.column.id, rerenderColumn])
 
     const addCard = () => {
         setAddCardModalShow(true);
@@ -79,13 +80,13 @@ const ColumnCard = (props) => {
                 show={addCardModalShow}
                 onHide={() => setAddCardModalShow(false)}
                 column_id={props.column.id}
+                rerender={() => setRerenderColumn(rerenderColumn + 1)}
             />
             <DeleteColumnModal
                 show={deleteColumnModalShow}
                 onHide={() => setDeleteColumnModalShow(false)}
                 column={props.column}
-                rerenderer={props.rerenderer}
-                rerender={props.rerender}
+                rerender={() => props.rerender(props.rerenderer + 1)}
             />
         </>
     )

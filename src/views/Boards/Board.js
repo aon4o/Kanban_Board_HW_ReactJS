@@ -72,8 +72,7 @@ const Board = () => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 board_id={board?.id}
-                rerenderer={rerenderColumns}
-                rerender={setRerenderColumns}
+                rerender={() => setRerenderColumns(rerenderColumns + 1)}
             />
         </>
     )

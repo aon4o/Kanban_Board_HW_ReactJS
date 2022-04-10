@@ -10,7 +10,7 @@ const DeleteColumnModal = (props) => {
             const deletedCards = await db.cards.where({column_id: props.column.id}).delete()
             await db.columns.delete(props.column.id);
             toast.success(`Column '${props.column.name}' deleted successfully with ${deletedCards} cards!`);
-            props.rerender(props.rerenderer + 1);
+            props.rerender();
             props.onHide();
         } catch (error) {
             toast.error(error);
