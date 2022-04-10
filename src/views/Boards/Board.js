@@ -1,12 +1,13 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useParams} from "react-router-dom";
-import {Button, Card, CardGroup, Col, Row} from "react-bootstrap";
+import {Button, CardGroup, Col, Row} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {db} from "../../db";
 import authContext from "../../utils/authContext";
 import Title from "../../components/Title";
-import AddColumnModal from "../../components/AddColumnModal";
+import AddColumnModal from "../../components/Column/AddColumnModal";
+import ColumnCard from "../../components/Column/ColumnCard";
 
 
 const Board = () => {
@@ -31,9 +32,10 @@ const Board = () => {
     }, [name])
 
     useEffect(() => {
-        db.columns.where({board_id: board?.id}).toArray()
+        db.columns.where({board_id: board?.id}).sortBy('position')
             .then(setColumns);
-    }, [board])
+
+    }, [board, modalShow])
 
     // await db.columns.where({board_id: cards.id}).toArray()
 
@@ -50,24 +52,15 @@ const Board = () => {
                     </div>
                 </Col>
 
-                <Col>
-                    <CardGroup>
-                        {
-                            columns?.map(column => (
-                                <Card>
-                                    <Card.Header>
-                                        {column.name}
-                                    </Card.Header>
-                                    <Card.Body>
-                                        <div>
-                                            TODO
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            ))
-                        }
-                    </CardGroup>
-                </Col>
+                <CardGroup>
+                    {
+                        columns?.map(column => (
+                            <Col key={column.index}>
+                                <ColumnCard column={column}/>
+                            </Col>
+                        ))
+                    }
+                </CardGroup>
 
             </Row>
 

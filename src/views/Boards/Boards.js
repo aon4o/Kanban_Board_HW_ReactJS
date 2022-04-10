@@ -6,16 +6,15 @@ import authContext from "../../utils/authContext";
 import {Button, Col, Row, Table} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import CreateBoardModal from "../../components/CreateBoardModal";
-import {LinkContainer} from "react-router-bootstrap";
-import {FaEdit, FaExternalLinkAlt, FaTrash} from "react-icons/fa";
+import CreateBoardModal from "../../components/Board/CreateBoardModal";
+import BoardRow from "../../components/Board/BoardRow";
 
 
 const Boards = () => {
 
     const auth = useContext(authContext);
     const navigate = useNavigate();
-    const [modalShow, setModalShow] = useState(false);
+    const [createBoardModalShow, setCreateBoardModalShow] = useState(false);
 
     useEffect(() => {
         if (!auth.user) {
@@ -36,7 +35,7 @@ const Boards = () => {
                 </Col>
                 <Col md={6}>
                     <div className={'d-flex justify-content-end'}>
-                        <Button variant={'outline-primary'} onClick={() => setModalShow(true)}>
+                        <Button variant={'outline-primary'} onClick={() => setCreateBoardModalShow(true)}>
                             New Board
                         </Button>
                     </div>
@@ -51,22 +50,7 @@ const Boards = () => {
                         </thead>
                         <tbody>
                         {boards?.map(board => (
-                            <tr key={board.id}>
-                                <td>
-                                    {board.name}
-                                </td>
-                                <td className={'d-flex justify-content-evenly'}>
-                                    <LinkContainer to={`${board.name}`}>
-                                        <Button variant={"success"}><FaExternalLinkAlt/></Button>
-                                    </LinkContainer>
-                                    <LinkContainer to={`#`}>
-                                        <Button disabled variant={"warning"}><FaEdit/></Button>
-                                    </LinkContainer>
-                                    <LinkContainer to={`#`}>
-                                        <Button disabled variant={"danger"}><FaTrash/></Button>
-                                    </LinkContainer>
-                                </td>
-                            </tr>
+                            <BoardRow key={board.id} board={board}/>
                         ))}
                         </tbody>
                     </Table>
@@ -74,8 +58,8 @@ const Boards = () => {
             </Row>
 
             <CreateBoardModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={createBoardModalShow}
+                onHide={() => setCreateBoardModalShow(false)}
             />
         </>
     )

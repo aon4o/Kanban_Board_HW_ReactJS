@@ -1,12 +1,10 @@
 import {Button, FloatingLabel, Form, Modal} from "react-bootstrap";
-import {useContext, useState} from "react";
-import {db} from "../db";
+import {useState} from "react";
+import {db} from "../../db";
 import {toast} from "react-toastify";
-import authContext from "../utils/authContext";
-import {useNavigate} from "react-router";
 
 
-const CreateBoardModal = (props) => {
+const AddColumnModal = (props) => {
 
     const [columnName, setColumnName] = useState('');
 
@@ -18,10 +16,17 @@ const CreateBoardModal = (props) => {
 
             if (column) {
                 throw new Error("Duplicate Column names!")
+            } else if (columnName.length < 3) {
+                throw new Error("Column name must be at least 3 symbols!")
+            } else if (columnName.length > 50) {
+                throw new Error("Column name must not be more than 50 symbols!")
             }
+
+            const columnsCount = (await db.columns.where({board_id: props.board_id}).toArray()).length;
 
             await db.columns.add({
                 name: columnName,
+                position: columnsCount + 1,
                 board_id: props.board_id,
             });
 
@@ -64,4 +69,4 @@ const CreateBoardModal = (props) => {
     )
 }
 
-export default CreateBoardModal;
+export default AddColumnModal;

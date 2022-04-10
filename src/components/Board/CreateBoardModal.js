@@ -1,8 +1,8 @@
 import {Button, FloatingLabel, Form, Modal} from "react-bootstrap";
 import {useContext, useState} from "react";
-import {db} from "../db";
+import {db} from "../../db";
 import {toast} from "react-toastify";
-import authContext from "../utils/authContext";
+import authContext from "../../utils/authContext";
 import {useNavigate} from "react-router";
 
 
