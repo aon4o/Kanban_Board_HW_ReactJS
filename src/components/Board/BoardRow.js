@@ -32,6 +32,7 @@ const BoardRow = (props) => {
                 board={props.board}
                 show={deleteBoardModalShow}
                 onHide={() => setDeleteBoardModalShow(false)}
+                rerender={props.rerender}
             />
         </>
     )

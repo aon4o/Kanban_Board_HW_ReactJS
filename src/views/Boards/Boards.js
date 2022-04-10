@@ -1,5 +1,4 @@
 import {db} from "../../db";
-import {useLiveQuery} from "dexie-react-hooks";
 import Title from "../../components/Title";
 import {useContext, useEffect, useState} from "react";
 import authContext from "../../utils/authContext";
@@ -8,6 +7,7 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import CreateBoardModal from "../../components/Board/CreateBoardModal";
 import BoardRow from "../../components/Board/BoardRow";
+import Loading from "../../components/Loading";
 
 
 const Boards = () => {
@@ -15,6 +15,9 @@ const Boards = () => {
     const auth = useContext(authContext);
     const navigate = useNavigate();
     const [createBoardModalShow, setCreateBoardModalShow] = useState(false);
+    const [boards, setBoards] = useState(undefined);
+    const [loading, setLoading] = useState(true);
+    const [rerender, setRerender] = useState(0);
 
     useEffect(() => {
         if (!auth.user) {
@@ -23,9 +26,12 @@ const Boards = () => {
         }
     }, [auth.user, navigate]);
 
-    const boards = useLiveQuery(
-        () => db.boards.toArray()
-    );
+    useEffect(() => {
+        db.boards.toArray()
+            .then(result => {setBoards(result)})
+            .catch(error => toast.error(error))
+            .finally(() => setLoading(false));
+    }, [rerender]);
 
     return (
         <>
@@ -41,19 +47,32 @@ const Boards = () => {
                     </div>
                 </Col>
                 <Col>
-                    <Table striped borderless hover variant={'primary'} className={'text-center'}>
-                        <thead>
-                        <tr>
-                            <th>Board</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {boards?.map(board => (
-                            <BoardRow key={board.id} board={board}/>
-                        ))}
-                        </tbody>
-                    </Table>
+                    {
+                        boards !== undefined && boards.length !== 0 && !loading ?
+                            <Table striped borderless hover variant={'primary'} className={'text-center'}>
+                                <thead>
+                                <tr>
+                                    <th>Board</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {boards?.map(board => (
+                                    <BoardRow
+                                        key={board.id}
+                                        board={board}
+                                        rerender={() => setRerender(rerender + 1)}
+                                    />
+                                ))}
+                                </tbody>
+                            </Table>
+                            :
+                            <Loading
+                                loading={loading}
+                                message={""}
+                            />
+                    }
+
                 </Col>
             </Row>
 

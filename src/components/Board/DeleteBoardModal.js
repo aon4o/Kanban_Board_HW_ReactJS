@@ -21,6 +21,10 @@ const DeleteBoardModal = (props) => {
             if (props.redirect) {
                 navigate('/boards');
             }
+            if (props.rerender) {
+                props.rerender();
+                props.onHide();
+            }
         } catch (error) {
             toast.error(error);
         }
