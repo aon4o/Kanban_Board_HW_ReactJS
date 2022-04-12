@@ -61,8 +61,7 @@ const Board = () => {
                         columns?.map(column => (
                             <ColumnCard key={column.index}
                                         column={column}
-                                        rerenderer={rerenderColumns}
-                                        rerender={setRerenderColumns}
+                                        rerender={() => setRerenderColumns(rerenderColumns + 1)}
                             />
                         ))
                     }

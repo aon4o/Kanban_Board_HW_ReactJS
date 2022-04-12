@@ -70,7 +70,7 @@ const Boards = () => {
                                 :
                                 <Loading
                                     loading={loading}
-                                    message={"There is no boards.]"}
+                                    message={"There is no boards."}
                                 />
                         }
 

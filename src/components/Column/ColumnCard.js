@@ -6,10 +6,12 @@ import AddCardModal from "../Card/AddCardModal";
 import CardCard from "../Card/CardCard";
 import DeleteColumnModal from "./DeleteColumnModal";
 import EditColumnModal from "./EditColumnModal";
+import {toast} from "react-toastify";
 
 
 const ColumnCard = (props) => {
 
+    const column = props.column;
     const [cards, setCards] = useState();
     const [addCardModalShow, setAddCardModalShow] = useState(false);
     const [editColumnModalShow, setEditColumnModalShow] = useState(false);
@@ -25,12 +27,45 @@ const ColumnCard = (props) => {
         setAddCardModalShow(true);
     }
 
-    const moveColumnLeft = () => {
+    const moveColumnLeft = async () => {
+        try {
 
+            if (column.position === 1) {
+                throw new Error(`The column is already at the most left position!`);
+            }
+
+            await db.columns
+                .where({position: column.position - 1, board_id: column.board_id})
+                .modify({position: column.position});
+            await db.columns
+                .where({name: column.name, board_id: column.board_id})
+                .modify({position: column.position - 1});
+
+            await props.rerender();
+        } catch (e) {
+            toast.error(e);
+        }
     }
 
-    const moveColumnRight = () => {
+    const moveColumnRight = async () => {
+        try {
+            if (!(await db.columns
+                .where({position: column.position + 1, board_id: column.board_id})
+                .first())) {
+                throw new Error(`The column is already at the most right position!`);
+            }
 
+            await db.columns
+                .where({position: column.position + 1, board_id: column.board_id})
+                .modify({position: column.position});
+            await db.columns
+                .where({name: column.name, board_id: column.board_id})
+                .modify({position: column.position + 1});
+
+            await props.rerender();
+        } catch (e) {
+            toast.error(e);
+        }
     }
 
     const editColumn = () => {
@@ -44,7 +79,7 @@ const ColumnCard = (props) => {
     return (
         <>
         <Card className={'scrollable-column'}>
-            <Card.Header className={''}>
+            <Card.Header>
                 <div className={'mb-1'}>
                     {props.column.name}
                 </div>
@@ -53,10 +88,19 @@ const ColumnCard = (props) => {
                     <Button variant={'outline-success'} size={'sm'} onClick={addCard}>
                         <FaPlus/>
                     </Button>
-                    <Button disabled variant={'outline-primary'} size={'sm'} onClick={moveColumnLeft}>
+                    <Button
+                        disabled={props.column.position === 1}
+                        variant={'outline-primary'}
+                        size={'sm'}
+                        onClick={moveColumnLeft}
+                    >
                         <FaArrowLeft/>
                     </Button>
-                    <Button disabled variant={'outline-primary'} size={'sm'} onClick={moveColumnRight}>
+                    <Button
+                        variant={'outline-primary'}
+                        size={'sm'}
+                        onClick={moveColumnRight}
+                    >
                         <FaArrowRight/>
                     </Button>
                     <Button variant={'outline-warning'} size={'sm'} onClick={editColumn}>
