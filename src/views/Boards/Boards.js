@@ -2,12 +2,12 @@ import {db} from "../../db";
 import Title from "../../components/Title";
 import {useContext, useEffect, useState} from "react";
 import authContext from "../../utils/authContext";
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import CreateBoardModal from "../../components/Board/CreateBoardModal";
-import BoardRow from "../../components/Board/BoardRow";
 import Loading from "../../components/Loading";
+import BoardsTable from "../../components/Board/BoardsTable";
 
 
 const Boards = () => {
@@ -50,23 +50,10 @@ const Boards = () => {
                     <Col>
                         {
                             boards !== undefined && boards.length !== 0 && !loading ?
-                                <Table striped borderless hover variant={'primary'} className={'text-center shadow-mine rounded-mine'}>
-                                    <thead>
-                                    <tr>
-                                        <th>Board</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {boards?.map(board => (
-                                        <BoardRow
-                                            key={board.id}
-                                            board={board}
-                                            rerender={() => setRerender(rerender + 1)}
-                                        />
-                                    ))}
-                                    </tbody>
-                                </Table>
+                                <BoardsTable
+                                    boards={boards}
+                                    rerender={() => setRerender(rerender + 1)}
+                                />
                                 :
                                 <Loading
                                     loading={loading}
