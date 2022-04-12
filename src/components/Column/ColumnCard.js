@@ -41,7 +41,7 @@ const ColumnCard = (props) => {
 
     return (
         <>
-        <Card>
+        <Card style={{width: "18rem"}} className={'scrollable-column'}>
             <Card.Header className={''}>
                 <div className={'mb-1'}>
                     {props.column.name}

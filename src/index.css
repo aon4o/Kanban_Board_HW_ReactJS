@@ -1,7 +1,6 @@
 :root {
-  --background: #a8b9ef;
-  --blue: #3960f6;
-  --light-blue: #bcc8f3;
+  --background: #a8b9ef;--blue: #3863ff;
+  --light-blue: #879dff;
 }
 
 body {
@@ -15,13 +14,41 @@ body {
 }
 
 footer {
-  background-color: var(--light-blue);
+  background-color: #bcc8f3;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
-.scroll {
+.scrollable-board {
   overflow-x: scroll;
-  overflow-y: scroll;
+}
+
+.scrollable-column {
+  overflow: scroll;
+  max-height: 35rem;
+}
+
+.bg-light-blue {
+  background-color: var(--light-blue) !important;
+}
+
+.bg-blue {
+  background-color: var(--blue) !important;
+}
+
+.rounded-mine {
+  border-radius: 20px !important;
+}
+
+.rounded-sm-mine {
+  border-radius: 15px !important;
+}
+
+.shadow-mine {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.125), 0 6px 20px 0 rgba(0, 0, 0, 0.125);
+}
+
+.shadow-hard-mine {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 }

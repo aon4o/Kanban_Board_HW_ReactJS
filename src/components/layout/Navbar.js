@@ -20,7 +20,10 @@ const NavBar = () => {
     return (
         <>
             <Navbar id={'navbar'} expand="lg" variant={"dark"}>
-                <Container id={'navbar-container'} className={'bg-primary shadow-lg-mine mt-3 px-3 py-2 rounded-3 border-3 border-primary'}>
+                <Container
+                    id={'navbar-container'}
+                    className={'shadow-hard-mine rounded-mine bg-primary shadow-lg-mine mt-3 px-3 py-2 border-3 border-primary'}
+                >
                     <LinkContainer to="/">
                         <Navbar.Brand>Kanban Board</Navbar.Brand>
                     </LinkContainer>

@@ -3,7 +3,7 @@ import {useState} from "react";
 import Title from "../components/Title";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import {Button, Col, FloatingLabel, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 const hash = require("sha1");
 
 const Home = () => {
@@ -35,45 +35,49 @@ const Home = () => {
     }
 
     return (
-        <Row>
-            <Col>
+        <Container className={'my-5'}>
+            <Row>
+                <Col>
 
-                <Title>Register</Title>
+                    <Title>Register</Title>
 
-                <Form onSubmit={register}>
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label="Username"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            placeholder="username"
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                        />
-                    </FloatingLabel>
+                    <Form onSubmit={register}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Username"
+                            className="mb-3 text-white"
+                        >
+                            <Form.Control
+                                className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                                type="text"
+                                placeholder="username"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </FloatingLabel>
 
-                    <FloatingLabel
-                        controlId="floatingPassword"
-                        label="Password"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingPassword"
+                            label="Password"
+                            className="mb-3 text-white"
+                        >
+                            <Form.Control
+                                className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                        </FloatingLabel>
 
-                    <Button type={'submit'} className="mb-3">
-                        Register
-                    </Button>
-                </Form>
+                        <Button type={'submit'} className="mb-3 rounded-sm-mine shadow-mine">
+                            Register
+                        </Button>
+                    </Form>
 
-            </Col>
-        </Row>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

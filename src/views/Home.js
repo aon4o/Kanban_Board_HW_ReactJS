@@ -1,6 +1,7 @@
 import {db} from "../db";
 import {useLiveQuery} from "dexie-react-hooks";
 import Title from "../components/Title";
+import {Container} from "react-bootstrap";
 
 
 const Home = () => {
@@ -11,11 +12,13 @@ const Home = () => {
 
     return (
         <>
-            <Title>Home</Title>
+            <Container className={'my-5'}>
+                <Title>Home</Title>
 
-            {users?.map(friend => <li key={friend.id}>
-                {friend.username}, {friend.age}
-            </li>)}
+                {users?.map(friend => <li key={friend.id}>
+                    {friend.username}, {friend.age}
+                </li>)}
+            </Container>
         </>
     )
 }

@@ -23,8 +23,8 @@ const DeleteBoardModal = (props) => {
             }
             if (props.rerender) {
                 props.rerender();
-                props.onHide();
             }
+            props.onHide();
         } catch (error) {
             toast.error(error);
         }
@@ -32,7 +32,7 @@ const DeleteBoardModal = (props) => {
 
     return (
         <>
-            <Modal {...props} centered>
+            <Modal show={props.show} centered>
                 <Form onSubmit={deleteBoard}>
                     <Modal.Header closeButton>
                         <Modal.Title>Delete a Board</Modal.Title>

@@ -2,7 +2,7 @@ import {db} from "../db";
 import {useContext, useState} from "react";
 import {toast} from "react-toastify";
 import Title from "../components/Title";
-import {Button, FloatingLabel, Form} from "react-bootstrap";
+import {Button, Container, FloatingLabel, Form} from "react-bootstrap";
 import {useNavigate} from "react-router";
 import authContext from "../utils/authContext";
 const hash = require('sha1');
@@ -38,39 +38,45 @@ const Home = () => {
 
     return (
         <>
-            <Title>Login</Title>
+            <Container className={'my-5'}>
 
-            <Form onSubmit={login}>
-                <FloatingLabel
-                    controlId="floatingInput"
-                    label="Username"
-                    className="mb-3"
-                >
-                    <Form.Control
-                        type="text"
-                        placeholder="username"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                    />
-                </FloatingLabel>
+                <Title>Login</Title>
 
-                <FloatingLabel
-                    controlId="floatingPassword"
-                    label="Password"
-                    className="mb-3"
-                >
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </FloatingLabel>
+                <Form onSubmit={login}>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label="Username"
+                        className="mb-3 text-white"
+                    >
+                        <Form.Control
+                            className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                            type="text"
+                            placeholder="username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                    </FloatingLabel>
 
-                <Button type={'submit'} className="mb-3">
-                    Login
-                </Button>
-            </Form>
+                    <FloatingLabel
+                        controlId="floatingPassword"
+                        label="Password"
+                        className="mb-3 text-white"
+                    >
+                        <Form.Control
+                            className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </FloatingLabel>
+
+                    <Button type={'submit'} className="mb-3 rounded-sm-mine shadow-mine">
+                        Login
+                    </Button>
+                </Form>
+
+            </Container>
         </>
     )
 }

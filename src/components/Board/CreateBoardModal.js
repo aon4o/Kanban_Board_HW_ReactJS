@@ -42,27 +42,28 @@ const CreateBoardModal = (props) => {
 
     return (
         <>
-            <Modal {...props} centered>
+            <Modal show={props.show} centered>
                 <Form onSubmit={createBoard}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className={'bg-blue text-white border-0'}>
                         <Modal.Title>Create New Board</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className={'bg-light-blue'}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Board Name"
-                            className="mb-3"
+                            className="mb-3 text-white"
                         >
                             <Form.Control
+                                className={'bg-blue text-white border-0'}
                                 type="text"
-                                placeholder="board name"
+                                placeholder="Board Name"
                                 autoFocus
                                 value={boardName}
                                 onChange={e => setBoardName(e.target.value)}
                             />
                         </FloatingLabel>
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className={'bg-blue text-white border-0'}>
                         <Button variant={'primary'} type={'submit'}>Create</Button>
                         <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
                     </Modal.Footer>

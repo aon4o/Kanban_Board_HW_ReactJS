@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useParams} from "react-router-dom";
-import {Button, CardGroup, Col, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {db} from "../../db";
 import authContext from "../../utils/authContext";
@@ -41,32 +41,37 @@ const Board = () => {
 
     return (
         <>
-            <Row>
-                <Col md={6}>
-                    <Title>Board - {name}</Title>
-                </Col>
+            <Container className={'my-5'}>
+                <Row>
+                    <Col md={6}>
+                        <Title>Board - {name}</Title>
+                    </Col>
 
-                <Col md={6}>
-                    <div className={'d-flex justify-content-end'}>
-                        <Button variant={'outline-primary'} onClick={() => setModalShow(true)}>Add Column</Button>
+                    <Col md={6}>
+                        <div className={'d-flex justify-content-end'}>
+                            <Button variant={'outline-primary'} onClick={() => setModalShow(true)}>Add Column</Button>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container fluid>
+                <Row>
+                    <div className={'scrollable-board container-fluid'}>
+                        <div className={'flex-nowrap row gap-3'}>
+                            {
+                                columns?.map(column => (
+                                    <ColumnCard key={column.index}
+                                                column={column}
+                                                rerenderer={rerenderColumns}
+                                                rerender={setRerenderColumns}
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
-                </Col>
-
-                <CardGroup>
-                    {
-                        columns?.map(column => (
-                            <Col key={column.index}>
-                                <ColumnCard
-                                    column={column}
-                                    rerenderer={rerenderColumns}
-                                    rerender={setRerenderColumns}
-                                />
-                            </Col>
-                        ))
-                    }
-                </CardGroup>
-
-            </Row>
+                </Row>
+            </Container>
 
             <AddColumnModal
                 show={modalShow}

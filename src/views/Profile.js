@@ -3,7 +3,7 @@ import {useLiveQuery} from "dexie-react-hooks";
 import Title from "../components/Title";
 import {useContext, useEffect} from "react";
 import authContext from "../utils/authContext";
-import {Col, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 
@@ -26,15 +26,17 @@ const Profile = () => {
 
     return (
         <>
-            <Title>Profile - {auth.user.username}</Title>
+            <Container className={'my-5'}>
+                <Title>Profile - {auth.user.username}</Title>
 
-            <Row>
-                <Col>
-                    {boards?.map((id, name, user_id) => {
-                        <p>{name}</p>
-                    })}
-                </Col>
-            </Row>
+                <Row>
+                    <Col>
+                        {boards?.map((id, name, user_id) => (
+                            <p>{name}</p>
+                        ))}
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }
