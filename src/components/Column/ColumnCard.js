@@ -5,12 +5,14 @@ import {useEffect, useState} from "react";
 import AddCardModal from "../Card/AddCardModal";
 import CardCard from "../Card/CardCard";
 import DeleteColumnModal from "./DeleteColumnModal";
+import EditColumnModal from "./EditColumnModal";
 
 
 const ColumnCard = (props) => {
 
     const [cards, setCards] = useState();
     const [addCardModalShow, setAddCardModalShow] = useState(false);
+    const [editColumnModalShow, setEditColumnModalShow] = useState(false);
     const [deleteColumnModalShow, setDeleteColumnModalShow] = useState(false);
     const [rerenderColumn, setRerenderColumn] = useState(0);
 
@@ -32,7 +34,7 @@ const ColumnCard = (props) => {
     }
 
     const editColumn = () => {
-
+        setEditColumnModalShow(true);
     }
 
     const deleteColumn = () => {
@@ -57,7 +59,7 @@ const ColumnCard = (props) => {
                     <Button disabled variant={'outline-primary'} size={'sm'} onClick={moveColumnRight}>
                         <FaArrowRight/>
                     </Button>
-                    <Button disabled variant={'outline-warning'} size={'sm'} onClick={editColumn}>
+                    <Button variant={'outline-warning'} size={'sm'} onClick={editColumn}>
                         <FaEdit/>
                     </Button>
                     <Button variant={'outline-danger'} size={'sm'} onClick={deleteColumn}>
@@ -81,6 +83,12 @@ const ColumnCard = (props) => {
                 onHide={() => setAddCardModalShow(false)}
                 column_id={props.column.id}
                 rerender={() => setRerenderColumn(rerenderColumn + 1)}
+            />
+            <EditColumnModal
+                show={editColumnModalShow}
+                onHide={() => setEditColumnModalShow(false)}
+                column={props.column}
+                rerender={() => props.rerender(props.rerenderer + 1)}
             />
             <DeleteColumnModal
                 show={deleteColumnModalShow}
