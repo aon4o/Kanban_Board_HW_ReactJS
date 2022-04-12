@@ -16,7 +16,7 @@ const BoardRow = (props) => {
                     {props.board.name}
                 </td>
                 <td className={'d-flex justify-content-evenly'}>
-                    <LinkContainer to={`${props.board.name}`}>
+                    <LinkContainer to={`/boards/${props.board.name}`}>
                         <Button variant={"success"}><FaExternalLinkAlt/></Button>
                     </LinkContainer>
                     <LinkContainer to={`#`}>

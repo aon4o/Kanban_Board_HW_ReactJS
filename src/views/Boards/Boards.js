@@ -60,7 +60,6 @@ const Boards = () => {
                                     message={"There is no boards."}
                                 />
                         }
-
                     </Col>
                 </Row>
 
