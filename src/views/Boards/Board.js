@@ -41,7 +41,7 @@ const Board = () => {
 
     return (
         <>
-            <Container className={'my-5'}>
+            <Container className={'mt-5'}>
                 <Row>
                     <Col md={6}>
                         <Title>Board - {name}</Title>
@@ -55,21 +55,17 @@ const Board = () => {
                 </Row>
             </Container>
 
-            <Container fluid>
-                <Row>
-                    <div className={'scrollable-board container-fluid'}>
-                        <div className={'flex-nowrap row gap-3'}>
-                            {
-                                columns?.map(column => (
-                                    <ColumnCard key={column.index}
-                                                column={column}
-                                                rerenderer={rerenderColumns}
-                                                rerender={setRerenderColumns}
-                                    />
-                                ))
-                            }
-                        </div>
-                    </div>
+            <Container fluid className={'px-4 d-flex align-items-stretch'}>
+                <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
+                    {
+                        columns?.map(column => (
+                            <ColumnCard key={column.index}
+                                        column={column}
+                                        rerenderer={rerenderColumns}
+                                        rerender={setRerenderColumns}
+                            />
+                        ))
+                    }
                 </Row>
             </Container>
 

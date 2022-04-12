@@ -38,6 +38,9 @@ const NavBar = () => {
                                     <LinkContainer to="/boards">
                                         <Nav.Link>Boards</Nav.Link>
                                     </LinkContainer>
+                                    <LinkContainer to="/recent">
+                                        <Nav.Link>Recent</Nav.Link>
+                                    </LinkContainer>
                                 </>
                                 :
                                 <></>
