@@ -125,7 +125,7 @@ const ColumnCard = (props) => {
             <AddCardModal
                 show={addCardModalShow}
                 onHide={() => setAddCardModalShow(false)}
-                column_id={props.column.id}
+                column={props.column}
                 rerender={() => setRerenderColumn(rerenderColumn + 1)}
             />
             <EditColumnModal

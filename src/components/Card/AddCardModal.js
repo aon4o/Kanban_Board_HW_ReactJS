@@ -31,7 +31,8 @@ const AddCardModal = (props) => {
                 title: title,
                 description: description,
                 user_id: auth.user.id,
-                column_id: props.column_id,
+                column_id: props.column.id,
+                board_id: props.column.board_id
             });
 
             toast.success(`Card '${title}' added successfully!`);
