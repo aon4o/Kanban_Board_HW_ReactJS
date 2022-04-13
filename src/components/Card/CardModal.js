@@ -10,7 +10,7 @@ const CardModal = (props) => {
 
     return (
         <>
-            <Modal {...props} centered size={'lg'}>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered size={'lg'}>
                 <Modal.Header closeButton>
                     <Modal.Title>{props.card.title}</Modal.Title>
                 </Modal.Header>

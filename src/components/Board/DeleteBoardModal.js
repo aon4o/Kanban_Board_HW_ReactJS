@@ -32,7 +32,7 @@ const DeleteBoardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={deleteBoard}>
                     <Modal.Header closeButton>
                         <Modal.Title>Delete a Board</Modal.Title>

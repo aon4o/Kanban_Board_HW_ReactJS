@@ -40,7 +40,7 @@ const EditColumnModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={rename}>
                     <Modal.Header closeButton>
                         <Modal.Title>Rename a Column</Modal.Title>

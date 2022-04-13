@@ -40,7 +40,7 @@ const AddColumnModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createBoard}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add a Column</Modal.Title>

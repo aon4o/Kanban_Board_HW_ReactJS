@@ -19,7 +19,7 @@ const DeleteColumnModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={deleteColumn}>
                     <Modal.Header closeButton>
                         <Modal.Title>Delete a Column</Modal.Title>

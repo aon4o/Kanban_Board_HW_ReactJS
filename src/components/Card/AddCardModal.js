@@ -45,7 +45,7 @@ const AddCardModal = (props) => {
 
     return (
         <>
-            <Modal {...props} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createBoard}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add a Card</Modal.Title>
