@@ -8,6 +8,7 @@ import authContext from "../../utils/authContext";
 import Title from "../../components/Title";
 import AddColumnModal from "../../components/Column/AddColumnModal";
 import ColumnCard from "../../components/Column/ColumnCard";
+import Loading from "../../components/Loading";
 
 
 const Board = () => {
@@ -15,8 +16,9 @@ const Board = () => {
     const auth = useContext(authContext);
     const navigate = useNavigate();
 
-    const [board, setBoard] = useState();
-    const [columns, setColumns] = useState();
+    const [board, setBoard] = useState(undefined);
+    const [columns, setColumns] = useState(undefined);
+    const [loadingColumns, setLoadingColumns] = useState(true);
     const [modalShow, setModalShow] = useState(false);
     const [rerenderColumns, setRerenderColumns] = useState(0);
 
@@ -29,15 +31,25 @@ const Board = () => {
 
     useEffect(() => {
         db.boards.where({name: name}).first()
-            .then(setBoard);
-    }, [name])
+            .then(setBoard)
+            .catch(toast.error);
+    }, [name, rerenderColumns])
+
+    useEffect(() => {
+        if (board !== undefined && auth.user) {
+            db.recent.add({
+                user_id: auth.user.id,
+                board_id: board.id
+            })
+        }
+    }, [auth.user, board])
 
     useEffect(() => {
         db.columns.where({board_id: board?.id}).sortBy('position')
-            .then(setColumns);
+            .then(setColumns)
+            .catch(toast.error)
+            .finally(() => setLoadingColumns(false));
     }, [board, rerenderColumns])
-
-    // await db.columns.where({board_id: cards.id}).toArray()
 
     return (
         <>
@@ -55,18 +67,28 @@ const Board = () => {
                 </Row>
             </Container>
 
-            <Container fluid className={'px-4 d-flex align-items-stretch'}>
-                <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
-                    {
-                        columns?.map(column => (
-                            <ColumnCard key={column.index}
-                                        column={column}
-                                        rerender={() => setRerenderColumns(rerenderColumns + 1)}
-                            />
-                        ))
-                    }
-                </Row>
-            </Container>
+            {
+                columns !== undefined && columns.length !== 0 && !loadingColumns ?
+                    <Container fluid className={'px-4 d-flex align-items-stretch'}>
+                        <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
+                            {
+                                columns?.map(column => (
+                                    <ColumnCard key={column.index}
+                                                column={column}
+                                                rerender={() => setRerenderColumns(rerenderColumns + 1)}
+                                    />
+                                ))
+                            }
+                        </Row>
+                    </Container>
+                    :
+                    <Container>
+                        <Loading
+                            loading={loadingColumns}
+                            message={"The Board doesn't have any Columns."}
+                        />
+                    </Container>
+            }
 
             <AddColumnModal
                 show={modalShow}
