@@ -39,16 +39,18 @@ const Recent = () => {
                 })
                 .catch(toast.error)
         }
-    }, [auth.user]);
+    }, [auth.user, rerender]);
 
     useEffect(() => {
         if (recent && recent.length !== 0) {
             db.boards.bulkGet(recent.slice(0, showNumber))
-                .then(setBoards)
+                .then(res => {
+                    setBoards(res.filter(item => item !== undefined))
+                })
                 .catch(toast.error)
                 .finally(() => setLoadingBoards(false));
         }
-    }, [recent, showNumber])
+    }, [recent, showNumber]);
 
     return (
         <>

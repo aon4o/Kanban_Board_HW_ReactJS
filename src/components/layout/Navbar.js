@@ -1,18 +1,48 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {LinkContainer} from 'react-router-bootstrap'
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import authContext from "../../utils/authContext";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import {Button} from "react-bootstrap";
+import {Button, ButtonGroup, Dropdown} from "react-bootstrap";
 import {AiOutlineDown} from "react-icons/ai";
 import {GiEvilLove} from "react-icons/gi";
 import Container from "react-bootstrap/Container";
+import {db} from "../../db";
 
 const NavBar = () => {
     const auth = useContext(authContext);
     const navigate = useNavigate();
+
+    const [recent, setRecent] = useState(undefined);
+    const [recentBoards, setRecentBoards] = useState(undefined);
+    const [refreshRecentBoards, setRefreshRecentBoards] = useState(0);
+
+    useEffect(() => {
+        if (auth.user) {
+            db.recent.where({user_id: auth.user.id}).desc().toArray()
+                .then((rows) => {
+                    const recentArray = [];
+                    for (const row of rows) {
+                        recentArray.push(row.board_id);
+                    }
+                    const recentSet = Array.from(new Set(recentArray));
+                    setRecent(recentSet);
+                })
+                .catch(toast.error)
+        }
+    }, [auth.user, refreshRecentBoards]);
+
+    useEffect(() => {
+        if (recent && recent.length !== 0) {
+            db.boards.bulkGet(recent.slice(0, 5))
+                .then(res => {
+                    setRecentBoards(res.filter(item => item !== undefined))
+                })
+                .catch(toast.error)
+        }
+    }, [recent]);
 
     const logout = () => {
         auth.setUser(undefined);
@@ -38,10 +68,28 @@ const NavBar = () => {
                                     <Button className={'linkButtons'}>Boards<AiOutlineDown fontSize={'15'}
                                                                                            className={'ms-1'}/></Button>
                                 </LinkContainer>
-                                <LinkContainer to="/recent">
-                                    <Button className={'linkButtons'}>Recent<AiOutlineDown fontSize={'15'}
-                                                                                           className={'ms-1'}/></Button>
-                                </LinkContainer>
+
+                                <Dropdown as={ButtonGroup}>
+                                    <LinkContainer to="/recent">
+                                        <Button className={'linkButtons'}>Recent</Button>
+                                    </LinkContainer>
+
+                                    <Dropdown.Toggle
+                                        split
+                                        className={'linkButtons'}
+                                        onFocus={() => setRefreshRecentBoards(refreshRecentBoards + 1)}
+                                    />
+
+                                    <Dropdown.Menu>
+                                        {
+                                            recentBoards?.map(board => (
+                                                <LinkContainer to={`/boards/${board.name}`} key={board.id}>
+                                                    <Dropdown.Item>{board.name}</Dropdown.Item>
+                                                </LinkContainer>
+                                            ))
+                                        }
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </>
                             :
                             <></>
