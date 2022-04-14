@@ -46,7 +46,13 @@ const CardModal = (props) => {
     }
 
     const archiveCard = () => {
-        toast('archive');
+        try {
+            db.cards.where({id: props.card.id}).modify({column_id: 'archived'});
+            props.rerender();
+            toast.success(`Card '${props.card.title}' successfully archived!`);
+        } catch (error) {
+            toast.error(error);
+        }
     }
 
     return (

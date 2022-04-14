@@ -9,6 +9,7 @@ import Title from "../../components/Title";
 import AddColumnModal from "../../components/Column/AddColumnModal";
 import ColumnCard from "../../components/Column/ColumnCard";
 import Loading from "../../components/Loading";
+import ArchivedCardsModal from "../../components/ArchivedCardsModal";
 
 
 const Board = () => {
@@ -19,7 +20,8 @@ const Board = () => {
     const [board, setBoard] = useState(undefined);
     const [columns, setColumns] = useState(undefined);
     const [loadingColumns, setLoadingColumns] = useState(true);
-    const [modalShow, setModalShow] = useState(false);
+    const [addColumnModalShow, setAddColumnModalShow] = useState(false);
+    const [archivedCardsModalShow, setArchivedCardsModalShow] = useState(false);
     const [rerenderColumns, setRerenderColumns] = useState(0);
 
     useEffect(() => {
@@ -62,7 +64,18 @@ const Board = () => {
 
                     <Col md={6}>
                         <div className={'d-flex justify-content-end'}>
-                            <Button className={'boardButton'} variant={'outline-light'} onClick={() => setModalShow(true)}>Add Column</Button>
+                            <Button
+                                className={'boardButton'}
+                                variant={'outline-light'}
+                                onClick={() => setArchivedCardsModalShow(true)}
+                            >Archived Cards</Button>
+                        </div>
+                        <div className={'d-flex justify-content-end'}>
+                            <Button
+                                className={'boardButton'}
+                                variant={'outline-light'}
+                                onClick={() => setAddColumnModalShow(true)}
+                            >Add Column</Button>
                         </div>
                     </Col>
                 </Row>
@@ -92,11 +105,22 @@ const Board = () => {
             }
 
             <AddColumnModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={addColumnModalShow}
+                onHide={() => setAddColumnModalShow(false)}
                 board_id={board?.id}
                 rerender={() => setRerenderColumns(rerenderColumns + 1)}
             />
+
+            {
+                board?.id &&
+                <ArchivedCardsModal
+                    show={archivedCardsModalShow}
+                    onHide={() => setArchivedCardsModalShow(false)}
+                    board_id={board?.id}
+                    rerender={() => setRerenderColumns(rerenderColumns + 1)}
+                />
+            }
+
         </>
     )
 }
