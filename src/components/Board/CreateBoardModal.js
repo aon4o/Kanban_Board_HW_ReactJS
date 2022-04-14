@@ -42,7 +42,7 @@ const CreateBoardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} centered>
+            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createBoard}>
                     <Modal.Header closeButton className={'bg-blue text-white border-0'}>
                         <Modal.Title>Create New Board</Modal.Title>
