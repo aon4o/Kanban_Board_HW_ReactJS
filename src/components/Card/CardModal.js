@@ -85,7 +85,12 @@ const CardModal = (props) => {
                             </Dropdown>
                             <Button variant={'outline-warning'} onClick={editCard}><FaEdit/> Edit</Button>
                             <Button variant={'outline-danger'} onClick={deleteCard}><FaTrash/> Delete</Button>
-                            <Button variant={'outline-warning'} onClick={archiveCard}><FaArchive/> Archive</Button>
+                            <Button
+                                disabled={props.card.column_id === 'archived' && 'true'}
+                                variant={'outline-warning'}
+                                onClick={archiveCard}>
+                                <FaArchive/> Archive
+                            </Button>
                         </Col>
                     </Row>
                 </Modal.Body>
