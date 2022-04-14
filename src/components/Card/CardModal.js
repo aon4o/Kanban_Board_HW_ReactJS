@@ -4,10 +4,13 @@ import {useLiveQuery} from "dexie-react-hooks";
 import {FaArchive, FaArrowRight, FaEdit, FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
+import DeleteCardModal from "./DeleteCardModal";
 
 const CardModal = (props) => {
 
     const [columns, setColumns] = useState(undefined);
+    const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
+    const [showEditCardModal, setShowEditCardModal] = useState(false);
 
     const user = useLiveQuery(() =>
         db.users.where({id: props.card.user_id}).first()
@@ -32,7 +35,7 @@ const CardModal = (props) => {
     }
 
     const deleteCard = () => {
-        toast('delete');
+        setShowDeleteCardModal(true);
     }
 
     const archiveCard = () => {
@@ -62,7 +65,7 @@ const CardModal = (props) => {
                                 <Dropdown.Menu>
                                     {
                                         columns?.map(column => (
-                                            <Dropdown.Item onClick={() => moveCard(column.id)}>{column.name}</Dropdown.Item>
+                                            <Dropdown.Item key={column.id} onClick={() => moveCard(column.id)}>{column.name}</Dropdown.Item>
                                         ))
                                     }
                                 </Dropdown.Menu>
@@ -81,6 +84,14 @@ const CardModal = (props) => {
                     <Button variant={'secondary'} onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
+            <DeleteCardModal
+                card={props.card}
+                show={showDeleteCardModal}
+                onHide={() => setShowDeleteCardModal(false)}
+                hideCardModal={props.onHide}
+                rerender={props.rerender}
+            />
         </>
     )
 }

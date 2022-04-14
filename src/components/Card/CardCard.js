@@ -38,6 +38,7 @@ const CardCard = (props) => {
                 card={props.card}
                 show={showCardModal}
                 onHide={() => setShowCardModal(false)}
+                rerender={props.rerender}
             />
         </>
     )

@@ -115,7 +115,11 @@ const ColumnCard = (props) => {
                 <Stack gap={3}>
                     {
                         cards?.map(card => (
-                            <CardCard key={card.id} card={card}/>
+                            <CardCard
+                                key={card.id}
+                                card={card}
+                                rerender={() => setRerenderColumn(rerenderColumn + 1)}
+                            />
                         ))
                     }
                 </Stack>
