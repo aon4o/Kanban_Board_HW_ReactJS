@@ -5,6 +5,7 @@ import {FaArchive, FaArrowRight, FaEdit, FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
+import EditCardModal from "./EditCardModal";
 
 const CardModal = (props) => {
 
@@ -31,7 +32,7 @@ const CardModal = (props) => {
     }
 
     const editCard = () => {
-        toast('edit');
+        setShowEditCardModal(true);
     }
 
     const deleteCard = () => {
@@ -84,6 +85,13 @@ const CardModal = (props) => {
                     <Button variant={'secondary'} onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
+            <EditCardModal
+                card={props.card}
+                show={showEditCardModal}
+                onHide={() => setShowEditCardModal(false)}
+                rerender={props.rerender}
+            />
 
             <DeleteCardModal
                 card={props.card}
