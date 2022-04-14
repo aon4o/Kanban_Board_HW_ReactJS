@@ -49,14 +49,14 @@ const Board = () => {
 
                     <Col md={6}>
                         <div className={'d-flex justify-content-end'}>
-                            <Button variant={'outline-primary'} onClick={() => setModalShow(true)}>Add Column</Button>
+                            <Button className={'boardButton'} variant={'outline-light'} onClick={() => setModalShow(true)}>Add Column</Button>
                         </div>
                     </Col>
                 </Row>
             </Container>
 
             <Container fluid className={'px-4 d-flex align-items-stretch'}>
-                <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
+                <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1 columns'}>
                     {
                         columns?.map(column => (
                             <ColumnCard key={column.index}

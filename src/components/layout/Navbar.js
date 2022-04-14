@@ -1,4 +1,3 @@
-import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {LinkContainer} from 'react-router-bootstrap'
@@ -6,6 +5,10 @@ import {useContext} from "react";
 import authContext from "../../utils/authContext";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
+import {Button} from "react-bootstrap";
+import {AiOutlineDown} from "react-icons/ai";
+import {GiEvilLove} from "react-icons/gi";
+import Container from "react-bootstrap/Container";
 
 const NavBar = () => {
     const auth = useContext(authContext);
@@ -19,54 +22,53 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar id={'navbar'} expand="lg" variant={"dark"}>
-                <Container
-                    id={'navbar-container'}
-                    className={'shadow-hard-mine rounded-mine bg-primary shadow-lg-mine mt-3 px-3 py-2 border-3 border-primary'}
-                >
-                    <LinkContainer to="/">
-                        <Navbar.Brand>Kanban Board</Navbar.Brand>
-                    </LinkContainer>
+            <Navbar id={'navbar'} variant={'dark'} className={'fw-bolder'}>
+                <LinkContainer to="/">
+                    <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
+                </LinkContainer>
 
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 
-                    <Navbar.Collapse id="basic-navbar-nav" className={"d-flex justify-content-end"}>
-                        <Nav className="align-self-end">
+                <Navbar.Collapse id="basic-navbar-nav" className={"d-flex"}>
+                    <Nav>
 
-                            {auth.user ?
-                                <>
-                                    <LinkContainer to="/boards">
-                                        <Nav.Link>Boards</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/recent">
-                                        <Nav.Link>Recent</Nav.Link>
-                                    </LinkContainer>
-                                </>
-                                :
-                                <></>
-                            }
+                        {auth.user ?
+                            <>
+                                <LinkContainer to="/boards">
+                                    <Button className={'linkButtons'}>Boards<AiOutlineDown fontSize={'15'}
+                                                                                           className={'ms-1'}/></Button>
+                                </LinkContainer>
+                                <LinkContainer to="/recent">
+                                    <Button className={'linkButtons'}>Recent<AiOutlineDown fontSize={'15'}
+                                                                                           className={'ms-1'}/></Button>
+                                </LinkContainer>
+                            </>
+                            :
+                            <></>
+                        }
 
-                            {auth.user ?
-                                <>
-                                    <LinkContainer to="/profile" className={'ms-5'}>
-                                        <Nav.Link>Profile</Nav.Link>
-                                    </LinkContainer>
-                                    <Nav.Link onClick={logout}>Log Out</Nav.Link>
-                                </>
-                                :
-                                <>
-                                    <LinkContainer to="/login" className={'ms-5'}>
-                                        <Nav.Link>Log In</Nav.Link>
+                        {auth.user ?
+                            <>
+                                <LinkContainer to="/profile">
+                                    <Button className={'linkButtons'}>Profile</Button>
+                                </LinkContainer>
+                                <Button className='linkButtons' onClick={logout}>Logout</Button>
+                            </>
+                            :
+                            <>
+                                <Container className={'d-flex justify-items-end'}>
+                                    <LinkContainer to="/login">
+                                        <Button className={'linkButtons'}>Log In</Button>
                                     </LinkContainer>
                                     <LinkContainer to="/register">
-                                        <Nav.Link>Register</Nav.Link>
+                                        <Button className={'linkButtons'}>Register</Button>
                                     </LinkContainer>
-                                </>
-                            }
+                                </Container>
+                            </>
+                        }
 
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         </>
     )

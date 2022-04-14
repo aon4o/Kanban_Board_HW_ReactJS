@@ -1,91 +1,137 @@
 :root {
-  --background: #a8b9ef;
-  --white: white;
+    --background: #a8b9ef;
+    --white: white;
 
-  --blue: #3863ff;
-  --light-blue: #879dff;
+    --blue: #3863ff;
+    --light-blue: #879dff;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background) !important;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2286x1600/24baa6609b89fb8eb0cc0aceb70eaf36/photo-1557682250-33bd709cbe85.jpg");
+    background-size: cover;
+    color: white !important;
+    font-family: 'Work Sans', sans-serif !important;
 }
 
 footer {
-  background-color: #bcc8f3;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+    background-color: #4126ab;
+    position: fixed;
+    bottom: 0;
+    color: white !important;
+    width: 100%;
+}
+
+#navbar {
+    background-color: #4126ab;
+    color: white !important;
+    max-height: 44px;
+}
+
+.boardButton {
+    background-color: #9f619a !important;
+    border: none !important;
+    color: white !important;
+}
+
+.boardButton:hover {
+   background-color: #a17eb1 !important;
+}
+
+.boardButton:focus {
+    box-shadow: none !important;
+}
+
+.boardButton:active {
+    user-select: none !important;
+}
+
+.columns {
+    color: black !important;
+}
+
+.linkButtons {
+    background-color: #4126ab !important;
+    border: none !important;
+}
+
+.linkButtons:hover {
+    background-color: #6751bc !important;
+}
+
+.linkButtons:focus {
+    box-shadow: none !important;
+}
+
+.linkButtons:active {
+    user-select: none !important;
 }
 
 .scrollable-board {
-  overflow-x: scroll;
+    overflow-x: scroll;
 }
 
 .scrollable-column {
-  overflow-y: scroll;
-  width: 18rem !important;
-  height: 40rem;
+    overflow-y: scroll;
+    width: 18rem !important;
+    height: 40rem;
 }
 
 .bg-light-blue {
-  background-color: var(--light-blue) !important;
+    background-color: var(--light-blue) !important;
 }
 
 .bg-blue {
-  background-color: var(--blue) !important;
+    background-color: var(--blue) !important;
 }
 
 .rounded-mine {
-  border-radius: 20px !important;
+    border-radius: 20px !important;
 }
 
 .rounded-sm-mine {
-  border-radius: 15px !important;
+    border-radius: 15px !important;
 }
 
 .shadow-mine {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.125), 0 6px 20px 0 rgba(0, 0, 0, 0.125);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.125), 0 6px 20px 0 rgba(0, 0, 0, 0.125);
 }
 
 .shadow-hard-mine {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar {
-  width: 14px !important;
-  background-color: var(--background);
+    width: 14px !important;
+    background-color: var(--background);
 }
 
 ::-webkit-scrollbar-button {
-  background-color: var(--background);
-  color: var(--white);
+    background-color: var(--background);
+    color: var(--white);
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 15px !important;
-  box-shadow: inset 0 0 100px var(--blue) !important;
+    border-radius: 15px !important;
+    box-shadow: inset 0 0 100px var(--blue) !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 100px var(--light-blue) !important;
+    box-shadow: inset 0 0 100px var(--light-blue) !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  box-shadow: inset 0 0 100px var(--light-blue) !important;
+    box-shadow: inset 0 0 100px var(--light-blue) !important;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--background);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
+    background-color: var(--background);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: var(--background);
+    background-color: var(--background);
 }

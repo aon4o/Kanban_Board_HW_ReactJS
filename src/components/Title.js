@@ -1,7 +1,7 @@
 
 
 const Title = (props) => {
-    document.title = "RKB | " + props.children;
+    document.title = props.children;
 
     return (
         <>
