@@ -39,6 +39,7 @@ const CardCard = (props) => {
                 show={showCardModal}
                 onHide={() => setShowCardModal(false)}
                 rerender={props.rerender}
+                rerenderBoard={props.rerenderBoard}
             />
         </>
     )

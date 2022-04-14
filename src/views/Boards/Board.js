@@ -45,6 +45,7 @@ const Board = () => {
     }, [auth.user, board])
 
     useEffect(() => {
+        setLoadingColumns(true);
         db.columns.where({board_id: board?.id}).sortBy('position')
             .then(setColumns)
             .catch(toast.error)

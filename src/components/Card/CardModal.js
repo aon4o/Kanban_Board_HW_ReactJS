@@ -27,8 +27,14 @@ const CardModal = (props) => {
     }, [props.card])
 
 
-    const moveCard = (column_id) => {
-        toast(column_id);
+    const moveCard = (column) => {
+        try {
+            db.cards.where({id: props.card.id}).modify({column_id: column.id});
+            toast.success(`Card '${props.card.title}' successfully moved to Column '${column.name}'!`);
+            props.rerenderBoard();
+        } catch (error) {
+            toast.error(error);
+        }
     }
 
     const editCard = () => {
@@ -66,7 +72,7 @@ const CardModal = (props) => {
                                 <Dropdown.Menu>
                                     {
                                         columns?.map(column => (
-                                            <Dropdown.Item key={column.id} onClick={() => moveCard(column.id)}>{column.name}</Dropdown.Item>
+                                            <Dropdown.Item key={column.id} onClick={() => moveCard(column)}>{column.name}</Dropdown.Item>
                                         ))
                                     }
                                 </Dropdown.Menu>
