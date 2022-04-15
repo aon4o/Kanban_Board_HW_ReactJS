@@ -5,7 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import authContext from "../../utils/authContext";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import {Button, ButtonGroup, Dropdown} from "react-bootstrap";
+import {Button, Dropdown} from "react-bootstrap";
 import {AiOutlineDown} from "react-icons/ai";
 import {GiEvilLove} from "react-icons/gi";
 import Container from "react-bootstrap/Container";
@@ -21,7 +21,7 @@ const NavBar = () => {
 
     useEffect(() => {
         if (auth.user) {
-            db.recent.where({user_id: auth.user.id}).desc().toArray()
+            db.recent.where({user_id: auth.user.id}).reverse().sortBy('id')
                 .then((rows) => {
                     const recentArray = [];
                     for (const row of rows) {
@@ -69,16 +69,12 @@ const NavBar = () => {
                                                                                            className={'ms-1'}/></Button>
                                 </LinkContainer>
 
-                                <Dropdown as={ButtonGroup}>
-                                    <LinkContainer to="/recent">
-                                        <Button className={'linkButtons'}>Recent</Button>
-                                    </LinkContainer>
-
+                                <Dropdown>
                                     <Dropdown.Toggle
                                         split
                                         className={'linkButtons'}
                                         onFocus={() => setRefreshRecentBoards(refreshRecentBoards + 1)}
-                                    />
+                                    >Recent</Dropdown.Toggle>
 
                                     <Dropdown.Menu>
                                         {

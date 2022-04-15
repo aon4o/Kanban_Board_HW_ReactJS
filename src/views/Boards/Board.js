@@ -37,14 +37,30 @@ const Board = () => {
             .catch(toast.error);
     }, [name, rerenderColumns])
 
+    const getRecentBoards = async () => {
+        await db.recent
+            .where({user_id: auth.user.id, board_id: board.id})
+            .delete()
+
+        const userRecent = await db.recent
+            .where({user_id: auth.user.id})
+            .toArray()
+
+        if (userRecent.length === 5) {
+            await db.recent.where({id: userRecent[0].id}).delete();
+        }
+
+        await db.recent.add({
+            user_id: auth.user.id,
+            board_id: board.id
+        })
+    }
+
     useEffect(() => {
         if (board !== undefined && auth.user) {
-            db.recent.add({
-                user_id: auth.user.id,
-                board_id: board.id
-            })
+            getRecentBoards();
         }
-    }, [auth.user, board])
+    }, [auth.user, board, getRecentBoards])
 
     useEffect(() => {
         setLoadingColumns(true);
@@ -87,7 +103,7 @@ const Board = () => {
                         <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1 columns'}>
                             {
                                 columns?.map(column => (
-                                    <ColumnCard key={column.index}
+                                    <ColumnCard key={column.id}
                                                 column={column}
                                                 rerender={() => setRerenderColumns(rerenderColumns + 1)}
                                     />

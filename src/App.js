@@ -9,7 +9,6 @@ import Login from "./views/Login";
 import Profile from "./views/Profile";
 import Boards from "./views/Boards/Boards";
 import Board from "./views/Boards/Board";
-import Recent from "./views/Recent";
 
 function App() {
 
@@ -26,7 +25,6 @@ function App() {
                             <Route index element={<Boards />} />
                             <Route path=":name" element={<Board />} />
                         </Route>
-                        <Route path='recent' element={<Recent />}/>
 
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
