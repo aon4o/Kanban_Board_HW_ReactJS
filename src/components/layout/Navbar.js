@@ -52,7 +52,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Navbar id={'navbar'} variant={'dark'} className={'fw-bolder'}>
+            <Navbar id={'navbar'} variant={'dark'} className={'fw-bolder'} sticky={'top'}>
                 <LinkContainer to="/">
                     <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
                 </LinkContainer>

@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ToastContainer} from "react-toastify";
-import './utils/navbarStickyAnimation';
 
 
 const container = document.getElementById('root');
