@@ -27,10 +27,20 @@ const CreateBoardModal = (props) => {
                 throw new Error("Board name must not be more than 50 symbols!");
             }
 
-            await db.boards.add({
+            const newBoard = await db.boards.add({
                 name: boardName,
                 user_id: auth.user.id,
             });
+
+            let columnsCount = 1;
+            for (const columnName of ['To Do', 'In Progress', 'Waiting Review', 'Done']) {
+                await db.columns.add({
+                    name: columnName,
+                    position: columnsCount,
+                    board_id: newBoard,
+                });
+                columnsCount++;
+            }
 
             toast.success(`Board '${boardName}' successfully created!`);
             navigate(`/boards/${boardName}`);
