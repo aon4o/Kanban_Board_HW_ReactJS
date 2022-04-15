@@ -9,6 +9,10 @@ const DeleteColumnModal = (props) => {
         try {
             const deletedCards = await db.cards.where({column_id: props.column.id}).delete()
             await db.columns.delete(props.column.id);
+            await db.columns
+                .where('position')
+                .above(props.column.position)
+                .modify(column => column.position -= 1);
             toast.success(`Column '${props.column.name}' deleted successfully with ${deletedCards} cards!`);
             props.rerender();
             props.onHide();
