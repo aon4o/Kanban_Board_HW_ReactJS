@@ -5,8 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import authContext from "../../utils/authContext";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import {Button, Dropdown} from "react-bootstrap";
-import {AiOutlineDown} from "react-icons/ai";
+import {Alert, Button, Dropdown} from "react-bootstrap";
 import {GiEvilLove} from "react-icons/gi";
 import Container from "react-bootstrap/Container";
 import {db} from "../../db";
@@ -65,8 +64,7 @@ const NavBar = () => {
                         {auth.user ?
                             <>
                                 <LinkContainer to="/boards">
-                                    <Button className={'linkButtons'}>Boards<AiOutlineDown fontSize={'15'}
-                                                                                           className={'ms-1'}/></Button>
+                                    <Button className={'linkButtons'}>Boards</Button>
                                 </LinkContainer>
 
                                 <Dropdown>
@@ -78,11 +76,16 @@ const NavBar = () => {
 
                                     <Dropdown.Menu>
                                         {
-                                            recentBoards?.map(board => (
-                                                <LinkContainer to={`/boards/${board.name}`} key={board.id}>
-                                                    <Dropdown.Item>{board.name}</Dropdown.Item>
-                                                </LinkContainer>
-                                            ))
+                                            recentBoards ?
+                                                recentBoards.map(board => (
+                                                    <LinkContainer to={`/boards/${board.name}`} key={board.id}>
+                                                        <Dropdown.Item>{board.name}</Dropdown.Item>
+                                                    </LinkContainer>
+                                                ))
+                                                :
+                                                <Alert variant={'warning'}>
+                                                    You don't have recent Boards yet!
+                                                </Alert>
                                         }
                                     </Dropdown.Menu>
                                 </Dropdown>
