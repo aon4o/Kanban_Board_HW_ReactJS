@@ -15,10 +15,10 @@ const AddCardModal = (props) => {
         e.preventDefault();
 
         try {
-            const card = await db.cards.where({title: title, board_id: props.column_id}).first();
+            const card = await db.cards.where({title: title, board_id: props.column.board_id}).first();
 
             if (card) {
-                throw new Error("Duplicate Card names for the current Column!")
+                throw new Error("Duplicate Card names for the current Board!")
             } else if (title.length < 3) {
                 throw new Error("Card title must be at least 3 symbols!")
             } else if (title.length > 50) {
