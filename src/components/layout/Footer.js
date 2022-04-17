@@ -42,7 +42,7 @@ const Footer = () => {
                             <FaLinkedin/>
                         </a>
                     </li>
-                </ul>кара
+                </ul>
             </Container>
         </footer>
     )
