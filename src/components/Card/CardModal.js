@@ -13,6 +13,8 @@ const CardModal = (props) => {
     const [columns, setColumns] = useState(undefined);
     const [cardLabels, setCardLabels] = useState(undefined);
     const [boardLabels, setBoardLabels] = useState(undefined);
+    const [users, setUsers] = useState(undefined);
+    const [cardAssignee, setCardAssignee] = useState({username: "Nobody"});
     const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
     const [showEditCardModal, setShowEditCardModal] = useState(false);
     const [showAddNewLabelModal, setShowAddNewLabelModal] = useState(false);
@@ -41,6 +43,18 @@ const CardModal = (props) => {
 
         db.labels.where({board_id: props.card.board_id}).toArray()
             .then(setBoardLabels)
+            .catch(toast.error);
+
+        if (props.card.assignee_id) {
+            db.users.where({id: props.card.assignee_id}).first()
+                .then(setCardAssignee)
+                .catch(toast.error);
+        } else {
+            setCardAssignee({username: "Nobody"});
+        }
+
+        db.users.toArray()
+            .then(setUsers)
             .catch(toast.error);
     }, [props.card])
 
@@ -98,9 +112,29 @@ const CardModal = (props) => {
         }
     }
 
+    function changeCardAssignee(user) {
+        db.cards.where({id: props.card.id})
+            .modify({assignee_id: user.id})
+            .then(() => {
+                toast.success(`User '${user.username}' assigned to Card '${props.card.title}' successfully!`);
+                props.rerender();
+            })
+            .catch(toast.error);
+    }
+
+    function removeCardAssignee() {
+        db.cards.where({id: props.card.id})
+            .modify({assignee_id: undefined})
+            .then(() => {
+                toast.success(`Assignee removed on Card '${props.card.title}' successfully!`);
+                props.rerender();
+            })
+            .catch(toast.error);
+    }
+
     return (
         <>
-            <Modal show={props.show} className={props.className} onHide={props.onHide} centered size={'lg'}>
+            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
                 <Modal.Header closeButton>
                     <Modal.Title>{props.card.title}</Modal.Title>
                 </Modal.Header>
@@ -150,6 +184,24 @@ const CardModal = (props) => {
                         </Col>
 
                         <Col md={4} className={'d-flex flex-column gap-2'}>
+                            <p>
+                                Assigned to:
+                                <Dropdown>
+                                    <Dropdown.Toggle>
+                                        {cardAssignee.username}
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item onClick={removeCardAssignee}>Nobody</Dropdown.Item>
+                                        {
+                                            users?.map(user => (
+                                                <Dropdown.Item onClick={() => changeCardAssignee(user)}>
+                                                    {user.username}
+                                                </Dropdown.Item>
+                                            ))
+                                        }
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </p>
                             <p>Actions</p>
                             <Dropdown>
                                 <Dropdown.Toggle variant={"outline-secondary"}>
