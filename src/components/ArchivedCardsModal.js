@@ -14,25 +14,26 @@ const ArchivedCardsModal = (props) => {
 
     return (
         <>
-            <Modal fullscreen show={props.show} className={props.className} onHide={props.onHide} centered size={'lg'}>
+            <Modal fullscreen show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
                 <Modal.Header closeButton>
                     <Modal.Title>Archived Cards</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
                     <Row>
-                        <Col md={12}>
-                            {
-                                cards?.map(card => (
+                        {
+                            cards?.map(card => (
+                                <Col md={3} key={card.id}>
                                     <CardCard
-                                        key={card.id}
                                         card={card}
+                                        className={'mb-3'}
+                                        archived
                                         rerender={() => setRerenderArchive(rerenderArchive + 1)}
                                         rerenderBoard={props.rerender}
                                     />
-                                ))
-                            }
-                        </Col>
+                                </Col>
+                            ))
+                        }
                     </Row>
                 </Modal.Body>
 

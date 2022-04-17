@@ -27,7 +27,7 @@ const DeleteCardModal = (props) => {
                     <Modal.Body>
                         <Alert className={"text-center"} variant={'danger'}>
                             <Alert.Heading>
-                                Are you sure you want to delete the Card with name '{props.card.name}'!
+                                Are you sure you want to delete the Card with name '{props.card.title}'!
                             </Alert.Heading>
                             <p>
                                 This action is not reversible!

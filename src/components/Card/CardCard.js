@@ -4,6 +4,7 @@ import {db} from "../../db";
 import {FaExternalLinkAlt} from "react-icons/fa";
 import CardModal from "./CardModal";
 import {useState} from "react";
+import ArchivedCardModal from "./ArchivedCardModal";
 
 const CardCard = (props) => {
 
@@ -15,7 +16,7 @@ const CardCard = (props) => {
 
     return (
         <>
-            <Card>
+            <Card className={props.className}>
                 <Card.Header className={'d-flex justify-content-between'}>
                     {props.card.title}
                     <Button
@@ -34,13 +35,26 @@ const CardCard = (props) => {
                 </Card.Footer>
             </Card>
 
-            <CardModal
-                card={props.card}
-                show={showCardModal}
-                onHide={() => setShowCardModal(false)}
-                rerender={props.rerender}
-                rerenderBoard={props.rerenderBoard}
-            />
+            {
+                props.archived
+                    ?
+                    <ArchivedCardModal
+                        card={props.card}
+                        show={showCardModal}
+                        onHide={() => setShowCardModal(false)}
+                        rerender={props.rerender}
+                        rerenderBoard={props.rerenderBoard}
+                    />
+                    :
+                    <CardModal
+                        card={props.card}
+                        show={showCardModal}
+                        onHide={() => setShowCardModal(false)}
+                        rerender={props.rerender}
+                        rerenderBoard={props.rerenderBoard}
+                    />
+            }
+
         </>
     )
 }

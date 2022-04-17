@@ -1,21 +1,16 @@
-import {Alert, Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
+import {Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
 import {db} from "../../db";
 import {useLiveQuery} from "dexie-react-hooks";
-import {FaArchive, FaArrowRight, FaEdit, FaPlus, FaTrash} from "react-icons/fa";
+import {FaArrowRight, FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
-import EditCardModal from "./EditCardModal";
-import AddLabelModal from "../Label/AddLabelModal";
 
 const CardModal = (props) => {
 
     const [columns, setColumns] = useState(undefined);
     const [cardLabels, setCardLabels] = useState(undefined);
-    const [boardLabels, setBoardLabels] = useState(undefined);
     const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
-    const [showEditCardModal, setShowEditCardModal] = useState(false);
-    const [showAddNewLabelModal, setShowAddNewLabelModal] = useState(false);
 
     const user = useLiveQuery(() =>
         db.users.where({id: props.card.user_id}).first()
@@ -38,10 +33,6 @@ const CardModal = (props) => {
                     .catch(toast.error);
             })
             .catch(toast.error);
-
-        db.labels.where({board_id: props.card.board_id}).toArray()
-            .then(setBoardLabels)
-            .catch(toast.error);
     }, [props.card])
 
 
@@ -55,47 +46,8 @@ const CardModal = (props) => {
         }
     }
 
-    const editCard = () => {
-        setShowEditCardModal(true);
-    }
-
     const deleteCard = () => {
         setShowDeleteCardModal(true);
-    }
-
-    const archiveCard = () => {
-        try {
-            db.cards.where({id: props.card.id}).modify({column_id: 'archived'});
-            props.rerender();
-            toast.success(`Card '${props.card.title}' successfully archived!`);
-        } catch (error) {
-            toast.error(error);
-        }
-    }
-
-    const addNewLabel = () => {
-        setShowAddNewLabelModal(true);
-    }
-
-    const addLabelToCard = async (label) => {
-        try {
-            const cardLabel = await db.card_labels
-                .where({card_id: props.card.id, label_id: label.id}).first();
-
-            if (cardLabel) {
-                throw new Error("The Card already has this Label!");
-            }
-
-            await db.card_labels.add({
-                card_id: props.card.id,
-                label_id: label.id,
-            })
-
-            toast.success(`Label '${label.title}' successfully added to Card '${props.card.title}'.`)
-            props.rerender();
-        } catch (error) {
-            toast.error(error);
-        }
     }
 
     return (
@@ -111,27 +63,6 @@ const CardModal = (props) => {
                             <div>
                                 <p>
                                     Labels:
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant={'outline-secondary'}>
-                                            <FaPlus/>Add Label
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            {
-                                                boardLabels && boardLabels.length !== 0 ?
-                                                    boardLabels.map(label => (
-                                                        <Dropdown.Item key={label.id} onClick={() => addLabelToCard(label)}>
-                                                            {label.title}
-                                                        </Dropdown.Item>
-                                                    ))
-                                                    :
-                                                    <Alert>
-                                                        There are no Labels for this Board yet!
-                                                    </Alert>
-                                            }
-                                            <Dropdown.Divider />
-                                            <Dropdown.Item onClick={addNewLabel}>Add New Label</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
                                 </p>
                                 <div>
                                     {
@@ -163,13 +94,7 @@ const CardModal = (props) => {
                                     }
                                 </Dropdown.Menu>
                             </Dropdown>
-                            <Button variant={'outline-warning'} onClick={editCard}><FaEdit/> Edit</Button>
                             <Button variant={'outline-danger'} onClick={deleteCard}><FaTrash/> Delete</Button>
-                            <Button
-                                variant={'outline-warning'}
-                                onClick={archiveCard}>
-                                <FaArchive/> Archive
-                            </Button>
                         </Col>
                     </Row>
                 </Modal.Body>
@@ -182,25 +107,11 @@ const CardModal = (props) => {
                 </Modal.Footer>
             </Modal>
 
-            <EditCardModal
-                card={props.card}
-                show={showEditCardModal}
-                onHide={() => setShowEditCardModal(false)}
-                rerender={props.rerender}
-            />
-
             <DeleteCardModal
                 card={props.card}
                 show={showDeleteCardModal}
                 onHide={() => setShowDeleteCardModal(false)}
                 hideCardModal={props.onHide}
-                rerender={props.rerender}
-            />
-
-            <AddLabelModal
-                card={props.card}
-                show={showAddNewLabelModal}
-                onHide={() => setShowAddNewLabelModal(false)}
                 rerender={props.rerender}
             />
         </>
