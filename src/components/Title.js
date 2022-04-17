@@ -5,7 +5,7 @@ const Title = (props) => {
 
     return (
         <>
-            <h1 className={'mb-5'}>{props.children}</h1>
+            <h1 className={'mb-5 fw-bolder'}>{props.children}</h1>
         </>
     )
 }

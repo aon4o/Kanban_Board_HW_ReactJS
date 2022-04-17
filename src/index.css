@@ -50,8 +50,13 @@ footer {
     color: white !important;
 }
 
+.inputText:focus {
+    box-shadow: none !important;
+    border-color: white !important;
+}
+
 .boardButton:hover {
-   background-color: #a17eb1 !important;
+    background-color: #a17eb1 !important;
 }
 
 .boardButton:focus {

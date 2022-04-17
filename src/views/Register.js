@@ -1,9 +1,9 @@
 import {db} from "../db";
 import {useState} from "react";
-import Title from "../components/Title";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
+import Title from "../components/Title";
 const hash = require("sha1");
 
 const Home = () => {
@@ -36,11 +36,13 @@ const Home = () => {
 
     return (
         <Container className={'my-5'}>
-            <Row>
+            <Row className={'text-center justify-content-center'}>
                 <Col>
-
-                    <Title>Register</Title>
-
+                    <Title>JOIN US</Title>
+                </Col>
+            </Row>
+            <Row className={'justify-content-center text-center'}>
+                <Col className={'col-sm-3'}>
                     <Form onSubmit={register}>
                         <FloatingLabel
                             controlId="floatingInput"
@@ -48,7 +50,7 @@ const Home = () => {
                             className="mb-3 text-white"
                         >
                             <Form.Control
-                                className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                                className={'bg-transparent text-white border-2 rounded-mine shadow-mine inputText'}
                                 type="text"
                                 placeholder="username"
                                 value={name}
@@ -62,7 +64,7 @@ const Home = () => {
                             className="mb-3 text-white"
                         >
                             <Form.Control
-                                className={'bg-light-blue text-white border-0 rounded-mine shadow-mine'}
+                                className={'bg-transparent text-white border-2 rounded-mine shadow-mine inputText'}
                                 type="password"
                                 placeholder="Password"
                                 value={password}
@@ -70,7 +72,7 @@ const Home = () => {
                             />
                         </FloatingLabel>
 
-                        <Button type={'submit'} className="mb-3 rounded-sm-mine shadow-mine">
+                        <Button type={'submit'} variant={"primary"}>
                             Register
                         </Button>
                     </Form>

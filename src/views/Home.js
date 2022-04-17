@@ -1,6 +1,7 @@
-import plan from '../static/images/plan.png'
+import Tittle from '../components/Title'
 import todo from '../static/images/todo.png'
 import {Button, ButtonGroup, Col, Container, Row} from "react-bootstrap";
+import Title from "../components/Title";
 
 
 const Home = () => {
@@ -10,7 +11,7 @@ const Home = () => {
             <Container className='welcomePage '>
                 <Row>
                     <Col>
-                        <h1 className='fw-bolder'>WELCOME TO UMRELLO!</h1>
+                        <h1 className='fw-bolder'>WELCOME TO <Title>UMRELLO!</Title></h1>
                     </Col>
                 </Row>
                 <Row>
