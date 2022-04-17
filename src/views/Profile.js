@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import BoardsTable from "../components/Board/BoardsTable";
 import Loading from "../components/Loading";
+import CardCard from "../components/Card/CardCard";
 
 const Profile = () => {
 
@@ -36,12 +37,11 @@ const Profile = () => {
     }, [auth.user, rerenderBoards]);
 
     useEffect(() => {
-        // TODO Get the tasks assigned to the current user
-        // db.cards.where({user_id: auth.user.id}).toArray()
-        //     .then(result => {setBoards(result)})
-        //     .catch(error => toast.error(error))
-        //     .finally(() => setLoading(false));
-    }, [auth.user]);
+        db.cards.where({assignee_id: auth.user.id}).toArray()
+            .then(setCards)
+            .catch(toast.error)
+            .finally(() => setLoadingCards(false));
+    }, [auth.user, rerenderCards]);
 
     return (
         <>
@@ -68,7 +68,13 @@ const Profile = () => {
                         <h3 className={'text-center mb-4'}>Tasks</h3>
                         {
                             cards !== undefined && cards.length !== 0 && !loadingCards ?
-                                "smth"
+                                    cards.map(card => (
+                                        <CardCard
+                                            key={card.id}
+                                            card={card}
+                                            rerender={() => setRerenderCards(rerenderCards + 1)}
+                                        />
+                                    ))
                                 :
                                 <Loading
                                     loading={loadingCards}
