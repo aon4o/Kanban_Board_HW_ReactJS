@@ -103,14 +103,6 @@ const NavBar = () => {
                             </>
                             :
                             <>
-                                <Container className={'d-flex justify-items-end'}>
-                                    <LinkContainer to="/login">
-                                        <Button className={'linkButtons'}>Log In</Button>
-                                    </LinkContainer>
-                                    <LinkContainer to="/register">
-                                        <Button className={'linkButtons'}>Register</Button>
-                                    </LinkContainer>
-                                </Container>
                             </>
                         }
 

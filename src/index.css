@@ -6,6 +6,20 @@
     --light-blue: #879dff;
 }
 
+.welcomePage {
+    padding-top: 30vh;
+}
+
+.homeImage {
+    position: relative !important;
+    bottom: 63.7% !important;
+}
+
+.homeBorder {
+    bottom: 75% !important;
+    position: relative !important;
+}
+
 body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
