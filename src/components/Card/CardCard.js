@@ -1,4 +1,4 @@
-import {Badge, Button, Card} from "react-bootstrap";
+import {Badge, Button, Card, Stack} from "react-bootstrap";
 import {db} from "../../db";
 import CardModal from "./CardModal";
 import {useEffect, useState} from "react";
@@ -28,14 +28,18 @@ const CardCard = (props) => {
         <>
             <Card className={props.className}>
                 <Card.Body className={'d-flex px-3 py-2 justify-content-between align-items-center'}>
-                    <div>
-                        {
-                            labels?.map(label => (
-                                <Badge pill bg="" style={{backgroundColor: label.color}}>{' '}</Badge>
-                            ))
-                        }
-                        {props.card.title}
-                    </div>
+                    <Stack>
+                        <Stack direction={"horizontal"} gap={1}>
+                            {
+                                labels?.map(label => (
+                                    <Badge pill bg="" style={{backgroundColor: label.color}}>{' '}</Badge>
+                                ))
+                            }
+                        </Stack>
+                        <div>
+                            {props.card.title}
+                        </div>
+                    </Stack>
 
                     <Button
                         className={'description'}
