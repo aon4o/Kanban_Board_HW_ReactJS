@@ -146,7 +146,7 @@ footer {
     overflow-y: scroll !important;
     width: 18rem !important;
     max-height: 60vh !important;
-    height: auto !important;
+    height: fit-content !important;
 }
 
 .bg-light-blue {

@@ -93,16 +93,18 @@ const Board = () => {
                                     />
                                 ))
                             }
-                            <Button
-                                className={'boardButton'}
-                                variant={'outline-light'}
-                                onClick={() => setAddColumnModalShow(true)}
-                            ><AiOutlinePlus/> Add Column</Button>
-                            <Button
-                                className={'boardButton'}
-                                variant={'outline-light'}
-                                onClick={() => setArchivedCardsModalShow(true)}
-                            >Archived Cards</Button>
+                            <Col>
+                                <Button
+                                    className={'boardButton mb-3'}
+                                    variant={'outline-light'}
+                                    onClick={() => setAddColumnModalShow(true)}
+                                ><AiOutlinePlus/> Add Column</Button>
+                                <Button
+                                    className={'boardButton'}
+                                    variant={'outline-light'}
+                                    onClick={() => setArchivedCardsModalShow(true)}
+                                >Archived Cards</Button>
+                            </Col>
                         </Row>
                     </Container>
                     :
