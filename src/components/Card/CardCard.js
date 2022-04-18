@@ -4,7 +4,6 @@ import CardModal from "./CardModal";
 import {useEffect, useState} from "react";
 import ArchivedCardModal from "./ArchivedCardModal";
 import {toast} from "react-toastify";
-import {AiFillEdit} from "react-icons/ai";
 import {VscEdit} from "react-icons/vsc";
 
 const CardCard = (props) => {
@@ -68,9 +67,11 @@ const CardCard = (props) => {
                         card={props.card}
                         show={showCardModal}
                         onHide={() => setShowCardModal(false)}
+                        labels={props.labels}
                         rerenderCard={() => setRerenderCard(rerenderCard + 1)}
                         rerenderColumn={props.rerenderColumn}
                         rerenderBoard={props.rerenderBoard}
+                        rerenderLabels={props.rerenderLabels}
                     />
             }
 

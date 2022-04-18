@@ -1,7 +1,7 @@
-import {Alert, Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
+import {Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
 import {db} from "../../db";
 import {useLiveQuery} from "dexie-react-hooks";
-import {FaArchive, FaArrowRight, FaEdit, FaPlus, FaTrash} from "react-icons/fa";
+import {FaArchive, FaArrowRight, FaEdit, FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
@@ -15,7 +15,6 @@ const CardModal = (props) => {
 
     const [columns, setColumns] = useState(undefined);
     const [cardLabels, setCardLabels] = useState(undefined);
-    const [boardLabels, setBoardLabels] = useState(undefined);
     const [users, setUsers] = useState(undefined);
     const [cardAssignee, setCardAssignee] = useState({username: "Nobody"});
     const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
@@ -42,10 +41,6 @@ const CardModal = (props) => {
                     .then(setCardLabels)
                     .catch(toast.error);
             })
-            .catch(toast.error);
-
-        db.labels.where({board_id: props.card.board_id}).toArray()
-            .then(setBoardLabels)
             .catch(toast.error);
 
         if (props.card.assignee_id) {
@@ -165,8 +160,8 @@ const CardModal = (props) => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu className={'dropdownItem'}>
                                             {
-                                                boardLabels && boardLabels.length !== 0 ?
-                                                    boardLabels.map(label => (
+                                                props.labels && props.labels.length !== 0 ?
+                                                    props.labels.map(label => (
                                                         <Dropdown.Item className={'dropdownItem'} key={label.id}
                                                                        onClick={() => addLabelToCard(label)}>
                                                             {label.title}
@@ -268,8 +263,7 @@ const CardModal = (props) => {
                 card={props.card}
                 show={showAddNewLabelModal}
                 onHide={() => setShowAddNewLabelModal(false)}
-                rerenderCard={props.rerenderCard}
-                rerenderColumn={props.rerenderColumn}
+                rerenderLabels={props.rerenderLabels}
             />
         </>
     )

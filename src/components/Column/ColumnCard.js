@@ -126,8 +126,10 @@ const ColumnCard = (props) => {
                                 <CardCard
                                     key={card.id}
                                     card={card}
+                                    labels={props.labels}
                                     rerenderColumn={() => setRerenderColumn(rerenderColumn + 1)}
                                     rerenderBoard={props.rerenderBoard}
+                                    rerenderLabels={props.rerenderLabels}
                                 />
                             ))
                         }
