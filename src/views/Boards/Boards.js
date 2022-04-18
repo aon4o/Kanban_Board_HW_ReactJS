@@ -50,7 +50,7 @@ const Boards = () => {
                         </div>
                     </Col>
                 </Row>
-                <Row className={'d-flex justify-content-around flex-row flex-wrap'}>
+                <Row className={'d-flex justify-content-around gap-4 flex-row flex-wrap'}>
                             {
                                 boards !== undefined && boards.length !== 0 && !loading ?
                                     <BoardsTable
