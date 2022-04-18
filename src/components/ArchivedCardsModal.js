@@ -26,7 +26,7 @@ const ArchivedCardsModal = (props) => {
                                 <Row md={3} key={card.id}>
                                     <CardCard
                                         card={card}
-                                        className={'mb-3'}
+                                        className={'m-2'}
                                         archived
                                         rerenderArchive={() => setRerenderArchive(rerenderArchive + 1)}
                                         rerenderBoard={props.rerenderBoard}
