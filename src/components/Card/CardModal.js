@@ -186,6 +186,15 @@ const CardModal = (props) => {
                                     {user?.username}
                                 </Button>
                             </p>
+                            <p className={'text-muted fw-bold'}>
+                                Created At:
+                                <br/>
+                                <Button
+                                    variant={'outline-dark mb-5'}
+                                    className={'cardModal'}>
+                                    {props.card.created_at}
+                                </Button>
+                            </p>
                             <p className={'text-muted fw-bold mb-4'}>
                                 Assigned to:
                                 <Dropdown>
