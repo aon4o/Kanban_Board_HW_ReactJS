@@ -32,22 +32,16 @@ const DeleteBoardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
+            <Modal show={props.show} className={props.className + ' text-dark'} onHide={props.onHide} centered>
                 <Form onSubmit={deleteBoard}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Delete a Board</Modal.Title>
+                        <Modal.Title>Delete Board</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Alert className={"text-center"} variant={'danger'}>
-                            <Alert.Heading>
-                                Are you sure you want to delete the board with name '{props.board.name}'!
-                            </Alert.Heading>
-                            This action is not reversible!
-                        </Alert>
+                        Do you want to delete the board named: ''{props.board.name}''?
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant={'danger'} onClick={deleteBoard}>Delete</Button>
-                        <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
+                        <Button variant={'danger'} onClick={deleteBoard}>Yes</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

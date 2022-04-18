@@ -28,24 +28,16 @@ const ArchiveColumnModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
+            <Modal show={props.show} className={props.className + ' text-dark'} onHide={props.onHide} centered>
                 <Form onSubmit={archiveColumn}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Archive a Column</Modal.Title>
+                        <Modal.Title>Archive Column</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Alert className={"text-center"} variant={'danger'}>
-                            <Alert.Heading>
-                                Are you sure you want to archive the Column with name '{props.column.name}'!
-                            </Alert.Heading>
-                            <p>
-                                With this action, all of the Cards in the Column will be archived!
-                            </p>
-                        </Alert>
+                        Do you want to archive the Column named: ''{props.column.name}''?
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant={'danger'} onClick={archiveColumn}>Archive</Button>
-                        <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
+                        <Button variant={'dark'} onClick={archiveColumn}>Archive</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

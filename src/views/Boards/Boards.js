@@ -42,7 +42,7 @@ const Boards = () => {
                     </Col>
                     <Col md={6}>
                         <div className={'d-flex justify-content-end'}>
-                            <Button variant={'outline-light'} onClick={() => setCreateBoardModalShow(true)}>
+                            <Button variant={'dark'} onClick={() => setCreateBoardModalShow(true)}>
                                 New Board
                             </Button>
                         </div>

@@ -43,7 +43,7 @@ const EditColumnModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={rename}>
-                    <Modal.Header className={'text-black'}>
+                    <Modal.Header className={'text-black'} closeButton>
                         <Modal.Title>Rename a Column</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={'text-black'}>
@@ -62,8 +62,7 @@ const EditColumnModal = (props) => {
                         </FloatingLabel>
                     </Modal.Body>
                     <Modal.Footer className={'text-black'}>
-                        <Button variant={'primary'} type={'submit'}>Rename</Button>
-                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
+                        <Button variant={'dark'} type={'submit'}>Save</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

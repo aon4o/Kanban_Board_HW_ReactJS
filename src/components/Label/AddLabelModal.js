@@ -50,8 +50,8 @@ const AddLabelModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createLabel}>
-                    <Modal.Header className={'text-black'}>
-                        <Modal.Title>Add a Label</Modal.Title>
+                    <Modal.Header className={'text-black'} closeButton>
+                        <Modal.Title>Add Label</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={'text-black'}>
                         <FloatingLabel
@@ -76,8 +76,7 @@ const AddLabelModal = (props) => {
                         />
                     </Modal.Body>
                     <Modal.Footer className={'text-black'}>
-                        <Button variant={'primary'} type={'submit'}>Add</Button>
-                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
+                        <Button variant={'dark'} type={'submit'}>Save</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

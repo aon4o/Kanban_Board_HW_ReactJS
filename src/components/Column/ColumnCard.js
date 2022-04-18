@@ -95,7 +95,7 @@ const ColumnCard = (props) => {
                         Move Column Right
                     </ListGroup.Item>
                     <ListGroup.Item action onClick={editColumn}>
-                        Edit Column
+                        Rename Column
                     </ListGroup.Item>
                     <ListGroup.Item action onClick={archiveColumn}>
                         Archive Column
@@ -135,7 +135,7 @@ const ColumnCard = (props) => {
                 </Card.Body>
                 <Button className={'text-start pb-2 px-3 addCard'} variant={'outline-secondary'} size={'sm'}
                         onClick={addCard}>
-                    <AiOutlinePlus/> Add a card
+                    <AiOutlinePlus/> Add card
                 </Button>
             </Card>
 

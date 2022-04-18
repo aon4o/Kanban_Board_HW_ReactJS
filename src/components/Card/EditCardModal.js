@@ -44,7 +44,7 @@ const EditCardModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={editCard}>
-                    <Modal.Header className={'text-black'}>
+                    <Modal.Header className={'text-black'} closeButton>
                         <Modal.Title>Edit a Card</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={'text-black'}>
@@ -72,8 +72,7 @@ const EditCardModal = (props) => {
                         </FloatingLabel>
                     </Modal.Body>
                     <Modal.Footer className={'text-black'}>
-                        <Button variant={'primary'} type={'submit'}>Edit</Button>
-                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
+                        <Button variant={'dark'} type={'submit'}>Save</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>
