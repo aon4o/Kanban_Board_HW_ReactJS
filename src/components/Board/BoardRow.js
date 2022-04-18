@@ -19,9 +19,6 @@ const BoardRow = (props) => {
                     <LinkContainer to={`/boards/${props.board.name}`}>
                         <Button variant={"success"}><FaExternalLinkAlt/></Button>
                     </LinkContainer>
-                    <LinkContainer to={`#`}>
-                        <Button disabled variant={"warning"}><FaEdit/></Button>
-                    </LinkContainer>
                     <Button variant={"danger"} onClick={() => setDeleteBoardModalShow(true)}>
                         <FaTrash/>
                     </Button>

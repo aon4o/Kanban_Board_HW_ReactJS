@@ -10,6 +10,7 @@ import AddColumnModal from "../../components/Column/AddColumnModal";
 import ColumnCard from "../../components/Column/ColumnCard";
 import Loading from "../../components/Loading";
 import ArchivedCardsModal from "../../components/ArchivedCardsModal";
+import {AiOutlinePlus} from "react-icons/ai";
 
 
 const Board = () => {
@@ -74,25 +75,8 @@ const Board = () => {
         <>
             <Container className={'mt-5'}>
                 <Row>
-                    <Col md={6}>
-                        <Title>Board - {name}</Title>
-                    </Col>
-
-                    <Col md={6}>
-                        <div className={'d-flex justify-content-end'}>
-                            <Button
-                                className={'boardButton'}
-                                variant={'outline-light'}
-                                onClick={() => setArchivedCardsModalShow(true)}
-                            >Archived Cards</Button>
-                        </div>
-                        <div className={'d-flex justify-content-end'}>
-                            <Button
-                                className={'boardButton'}
-                                variant={'outline-light'}
-                                onClick={() => setAddColumnModalShow(true)}
-                            >Add Column</Button>
-                        </div>
+                    <Col>
+                        <h1>Board <Title>{name}</Title></h1>
                     </Col>
                 </Row>
             </Container>
@@ -100,7 +84,7 @@ const Board = () => {
             {
                 columns !== undefined && columns.length !== 0 && !loadingColumns ?
                     <Container fluid className={'px-4 d-flex align-items-stretch'}>
-                        <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1 columns'}>
+                        <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
                             {
                                 columns?.map(column => (
                                     <ColumnCard key={column.id}
@@ -109,6 +93,16 @@ const Board = () => {
                                     />
                                 ))
                             }
+                            <Button
+                                className={'boardButton'}
+                                variant={'outline-light'}
+                                onClick={() => setAddColumnModalShow(true)}
+                            ><AiOutlinePlus/> Add Column</Button>
+                            <Button
+                                className={'boardButton'}
+                                variant={'outline-light'}
+                                onClick={() => setArchivedCardsModalShow(true)}
+                            >Archived Cards</Button>
                         </Row>
                     </Container>
                     :
