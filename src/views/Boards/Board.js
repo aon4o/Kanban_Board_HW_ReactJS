@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useParams} from "react-router-dom";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row, Stack} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {db} from "../../db";
 import authContext from "../../utils/authContext";
@@ -93,9 +93,9 @@ const Board = () => {
                                     />
                                 ))
                             }
-                            <Col>
+                            <Stack gap={3}>
                                 <Button
-                                    className={'boardButton mb-3'}
+                                    className={'boardButton'}
                                     variant={'outline-light'}
                                     onClick={() => setAddColumnModalShow(true)}
                                 ><AiOutlinePlus/> Add Column</Button>
@@ -104,7 +104,7 @@ const Board = () => {
                                     variant={'outline-light'}
                                     onClick={() => setArchivedCardsModalShow(true)}
                                 >Archived Cards</Button>
-                            </Col>
+                            </Stack>
                         </Row>
                     </Container>
                     :
