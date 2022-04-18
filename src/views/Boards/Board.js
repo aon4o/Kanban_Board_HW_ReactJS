@@ -76,7 +76,7 @@ const Board = () => {
             <Container className={'mt-5'}>
                 <Row>
                     <Col>
-                        <h1>Board <Title>{name}</Title></h1>
+                        <Title>{name}</Title>
                     </Col>
                 </Row>
             </Container>
