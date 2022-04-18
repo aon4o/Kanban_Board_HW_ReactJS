@@ -26,7 +26,7 @@ const CardCard = (props) => {
 
     return (
         <>
-            <Card className={props.className + ' border-1'}>
+            <Card className={props.className + ' border-1 cardCard'}>
                 <Card.Body className={'d-flex px-3 py-2 justify-content-between align-items-center'}>
                     <Stack>
                         <Stack direction={"horizontal"} gap={1}>

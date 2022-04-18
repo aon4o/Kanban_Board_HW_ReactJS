@@ -55,13 +55,13 @@ const NavBar = () => {
                 {auth.user ?
                     <>
                         <LinkContainer to="/profile">
-                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
+                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'25'} className={'me-1 mb-1'}/><text className={'homebutton'}>Umrello</text></Button>
                         </LinkContainer>
                     </>
                     :
                     <>
                         <LinkContainer to="/">
-                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
+                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'25'} className={'me-1 mb-1'}/><text className={'homebutton'}>Umrello</text></Button>
                         </LinkContainer>
                     </>
                 }
