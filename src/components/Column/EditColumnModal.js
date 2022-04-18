@@ -2,6 +2,7 @@ import {Button, FloatingLabel, Form, Modal} from "react-bootstrap";
 import {useState} from "react";
 import {db} from "../../db";
 import {toast} from "react-toastify";
+import {CgClose} from "react-icons/cg";
 
 
 const EditColumnModal = (props) => {
@@ -42,10 +43,10 @@ const EditColumnModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={rename}>
-                    <Modal.Header closeButton>
+                    <Modal.Header className={'text-black'}>
                         <Modal.Title>Rename a Column</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className={'text-black'}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Column Name"
@@ -60,9 +61,9 @@ const EditColumnModal = (props) => {
                             />
                         </FloatingLabel>
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className={'text-black'}>
                         <Button variant={'primary'} type={'submit'}>Rename</Button>
-                        <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
+                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
                     </Modal.Footer>
                 </Form>
             </Modal>
