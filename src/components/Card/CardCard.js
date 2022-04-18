@@ -3,8 +3,9 @@ import {db} from "../../db";
 import CardModal from "./CardModal";
 import {useEffect, useState} from "react";
 import ArchivedCardModal from "./ArchivedCardModal";
-import {GrTextAlignFull} from "react-icons/gr";
 import {toast} from "react-toastify";
+import {AiFillEdit} from "react-icons/ai";
+import {VscEdit} from "react-icons/vsc";
 
 const CardCard = (props) => {
 
@@ -26,7 +27,7 @@ const CardCard = (props) => {
 
     return (
         <>
-            <Card className={props.className}>
+            <Card className={props.className + ' border-1'}>
                 <Card.Body className={'d-flex px-3 py-2 justify-content-between align-items-center'}>
                     <Stack>
                         <Stack direction={"horizontal"} gap={1}>
@@ -47,7 +48,7 @@ const CardCard = (props) => {
                         size={'sm'}
                         onClick={() => setShowCardModal(true)}
                     >
-                        <GrTextAlignFull/>
+                        <VscEdit/>
                     </Button>
                 </Card.Body>
             </Card>

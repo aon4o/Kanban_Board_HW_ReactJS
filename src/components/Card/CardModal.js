@@ -8,6 +8,8 @@ import DeleteCardModal from "./DeleteCardModal";
 import EditCardModal from "./EditCardModal";
 import AddLabelModal from "../Label/AddLabelModal";
 import {GrTextAlignFull} from "react-icons/gr";
+import {MdLabel, MdVideoLabel} from "react-icons/md";
+import {AiOutlinePlus} from "react-icons/ai";
 
 const CardModal = (props) => {
 
@@ -138,7 +140,7 @@ const CardModal = (props) => {
             <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered
                    size={'lg'}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{props.card.title}</Modal.Title>
+                    <Modal.Title><MdVideoLabel size={'22'}/> {props.card.title}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className={'text-black'}>
@@ -146,39 +148,38 @@ const CardModal = (props) => {
                         <Col md={8}>
                             <div>
                                 <p>
-                                    Labels:
+                                    <MdLabel size={'22'} className={'mb-1 text-muted'}/> Labels:
+                                    <div>
+                                        {
+                                            cardLabels?.map(label => (
+                                                <Badge className={'mx-1'} bg={''} key={label.id} style={{backgroundColor: label.color}}>
+                                                    {label.title}
+                                                </Badge>
+                                            ))
+                                        }
+                                    </div>
                                     <Dropdown>
-                                        <Dropdown.Toggle variant={'outline-secondary'}>
-                                            <FaPlus/>Add Label
+                                        <Dropdown.Toggle variant={'outline-dark'} size={'sm'}
+                                                         className={'description mt-2 mb-4'}>
+                                            <AiOutlinePlus/> Add Label
                                         </Dropdown.Toggle>
-                                        <Dropdown.Menu>
+                                        <Dropdown.Menu className={'dropdownItem'}>
                                             {
                                                 boardLabels && boardLabels.length !== 0 ?
                                                     boardLabels.map(label => (
-                                                        <Dropdown.Item key={label.id}
+                                                        <Dropdown.Item className={'dropdownItem'} key={label.id}
                                                                        onClick={() => addLabelToCard(label)}>
                                                             {label.title}
                                                         </Dropdown.Item>
                                                     ))
                                                     :
-                                                    <Alert>
-                                                        There are no Labels for this Board yet!
-                                                    </Alert>
+                                                    <></>
                                             }
                                             <Dropdown.Divider/>
                                             <Dropdown.Item onClick={addNewLabel}>Add New Label</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </p>
-                                <div>
-                                    {
-                                        cardLabels?.map(label => (
-                                            <Badge bg={''} key={label.id} style={{backgroundColor: label.color}}>
-                                                {label.title}
-                                            </Badge>
-                                        ))
-                                    }
-                                </div>
                             </div>
                             <div>
                                 <p><GrTextAlignFull size={'22'}/> Description:</p>
@@ -199,16 +200,19 @@ const CardModal = (props) => {
                             <p className={'text-muted fw-bold mb-4'}>
                                 Assigned to:
                                 <Dropdown>
-                                    <Dropdown.Toggle>
+                                    <Dropdown.Toggle className={'dropdownMenu'}>
                                         {cardAssignee.username}
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item onClick={removeCardAssignee}>Nobody</Dropdown.Item>
                                         {
                                             users?.map(user => (
-                                                <Dropdown.Item onClick={() => changeCardAssignee(user)}>
-                                                    {user.username}
-                                                </Dropdown.Item>
+                                                <>
+                                                    <Dropdown.Divider/>
+                                                    <Dropdown.Item onClick={() => changeCardAssignee(user)}>
+                                                        {user.username}
+                                                    </Dropdown.Item>
+                                                </>
                                             ))
                                         }
                                     </Dropdown.Menu>
@@ -231,7 +235,8 @@ const CardModal = (props) => {
                                 <Button variant={'outline-dark'} className={'cardModal mb-2'}
                                         onClick={editCard}><FaEdit/> Edit</Button>
                                 <Button variant={'outline-dark'} className={'cardModal mb-2'}
-                                        onClick={deleteCard}><FaTrash/> Delete</Button>
+                                        onClick={deleteCard}><FaTrash/> Delete
+                                </Button>
                                 <Button
                                     variant={'outline-dark'}
                                     className={'cardModal mb-2'}

@@ -77,7 +77,7 @@ const AddCardModal = (props) => {
                         </FloatingLabel>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant={'primary'} type={'submit'}>Add</Button>
+                        <Button variant={'dark'} type={'submit'}>Add</Button>
                         <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
                     </Modal.Footer>
                 </Form>

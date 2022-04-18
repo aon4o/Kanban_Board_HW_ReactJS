@@ -5,6 +5,8 @@ import {FaArrowRight, FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
+import {GrTextAlignFull} from "react-icons/gr";
+import {MdLabel, MdVideoLabel} from "react-icons/md";
 
 const CardModal = (props) => {
 
@@ -52,59 +54,61 @@ const CardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className} onHide={props.onHide} centered size={'lg'}>
+            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{props.card.title}</Modal.Title>
+                    <Modal.Title><MdVideoLabel size={'22'}/> {props.card.title}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className={'text-black'}>
                     <Row>
                         <Col md={8}>
+                            <MdLabel size={'22'} className={'mb-1 text-muted'}/> Labels:
                             <div>
-                                <p>
-                                    Labels:
-                                </p>
-                                <div>
-                                    {
-                                        cardLabels?.map(label => (
-                                            <Badge bg={''} key={label.id} style={{backgroundColor: label.color}}>
-                                                {label.title}
-                                            </Badge>
-                                        ))
-                                    }
-                                </div>
+                                {
+                                    cardLabels?.map(label => (
+                                        <Badge  className={'mx-1'} bg={''} key={label.id} style={{backgroundColor: label.color}}>
+                                            {label.title}
+                                        </Badge>
+                                    ))
+                                }
                             </div>
-                            <div>
-                                <p>Description:</p>
-                                <p>{props.card.description}</p>
+                            <div className={'mt-5'}>
+                                <p><GrTextAlignFull size={'22'}/> Description:</p>
+                                <p className={' px-2 col-11 descriptionField'}>{props.card.description}</p>
                             </div>
                         </Col>
 
-                        <Col md={4} className={'d-flex flex-column gap-2'}>
-                            <p>Actions</p>
-                            <Dropdown>
-                                <Dropdown.Toggle variant={"outline-secondary"}>
-                                    <FaArrowRight/> Move
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {
-                                        columns?.map(column => (
-                                            <Dropdown.Item key={column.id} onClick={() => moveCard(column)}>{column.name}</Dropdown.Item>
-                                        ))
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <Button variant={'outline-danger'} onClick={deleteCard}><FaTrash/> Delete</Button>
+                        <Col md={4} className={'d-flex flex-column'}>
+                            <p className={'text-muted fw-bold'}>
+                                Creator:
+                                <br/>
+                                <Button
+                                    variant={'outline-dark mb-5'}
+                                    className={'cardModal'}>
+                                    {user?.username}
+                                </Button>
+                            </p>
+                            <p className={'text-muted fw-bold'}>Actions
+                                <Dropdown>
+                                    <Dropdown.Toggle variant={"outline-dark"} className={'cardModal mb-2'}>
+                                        <FaArrowRight/> Move
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        {
+                                            columns?.map(column => (
+                                                <Dropdown.Item key={column.id}
+                                                               onClick={() => moveCard(column)}>{column.name}</Dropdown.Item>
+                                            ))
+                                        }
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <Button variant={'outline-dark'} className={'cardModal mb-2'}
+                                        onClick={deleteCard}><FaTrash/> Delete
+                                </Button>
+                            </p>
                         </Col>
                     </Row>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <span>
-                        Created by - {user?.username}
-                    </span>
-                    <Button variant={'secondary'} onClick={props.onHide}>Close</Button>
-                </Modal.Footer>
             </Modal>
 
             <DeleteCardModal

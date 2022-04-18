@@ -23,7 +23,7 @@ const ArchivedCardsModal = (props) => {
                     <Row>
                         {
                             cards?.map(card => (
-                                <Col md={3} key={card.id}>
+                                <Row md={3} key={card.id}>
                                     <CardCard
                                         card={card}
                                         className={'mb-3'}
@@ -31,15 +31,11 @@ const ArchivedCardsModal = (props) => {
                                         rerenderArchive={() => setRerenderArchive(rerenderArchive + 1)}
                                         rerenderBoard={props.rerenderBoard}
                                     />
-                                </Col>
+                                </Row>
                             ))
                         }
                     </Row>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant={'secondary'} onClick={props.onHide}>Close</Button>
-                </Modal.Footer>
             </Modal>
         </>
     )

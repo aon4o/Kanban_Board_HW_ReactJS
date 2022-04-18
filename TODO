@@ -1,28 +1,28 @@
 Trello board:
-- Дъска, която да съдържа множество колони (също да може да се добяват динамично колони), които съдържат списък от eлементи (също да могат динамично да се добавят елементи във всяка колона)
-- Елементите в колоните да съдържат всички бутони и полета за попълване показани във втората картина, поставена в doc file-a
-- Елементите в колоните да показват кратко описание на съдържанието в елемента и при click, да се отваря компонент на преден план показващ допълнителната информация съдържаща се в елемента
-- Елементите да могат лесно да се прехвърлят от една в друга колона на дъската
-- Възможност да се създават дъски
-- Екран за виждане на всички дъски в приложението
-- Екран за виждане на всички скорощни добавени елементи в дъските
++ Дъска, която да съдържа множество колони (също да може да се добяват динамично колони), които съдържат списък от eлементи (също да могат динамично да се добавят елементи във всяка колона)
+Dates/ Елементите в колоните да съдържат всички бутони и полета за попълване показани във втората картина, поставена в doc file-a
++ Елементите в колоните да показват кратко описание на съдържанието в елемента и при click, да се отваря компонент на преден план показващ допълнителната информация съдържаща се в елемента
++ Елементите да могат лесно да се прехвърлят от една в друга колона на дъската
++ Възможност да се създават дъски
++ Екран за виждане на всички дъски в приложението
+ Boards no Elements/ Екран за виждане на всички скорощни добавени елементи в дъските
 
 Requirements:
-- Framework - React!
-- No real authentication required (just add a username to continue)
-- The content to be visible or have a way to see the content in a friendly way
-- A user can have multiple boards
-- DragNDrop (Optional)
++ Framework - React!
++ No real authentication required (just add a username to continue)
++ The content to be visible or have a way to see the content in a friendly way
++ A user can have multiple boards
++ DragNDrop (Optional)
 - No use of HTML tables
-- Content is up to you
-- Easy transfer from one column to another
-- You can add as much as you like columns
-- Have a 'Recent' page with all recently created tasks
-- Archive stores tasks that are no longer required in other columns
-- Home page required
-- CRUD like operations for board
-- No database required, no back-end required (but you can use if you want)
-- https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API ( optional )
-- No limits about the libraries you want to use
-- When you close the browser and get it back on - the state have to be the same
++ Content is up to you
++ Easy transfer from one column to another
++ You can add as much as you like columns
+Boards not Tasks/ Have a 'Recent' page with all recently created tasks
++ Archive stores tasks that are no longer required in other columns
++ Home page required
++ CRUD like operations for board
++ No database required, no back-end required (but you can use if you want)
++ https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API ( optional )
++ No limits about the libraries you want to use
++ When you close the browser and get it back on - the state have to be the same
 - When you search for item make sure the item that was found is clear to the user
