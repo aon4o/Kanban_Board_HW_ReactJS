@@ -1,4 +1,4 @@
-import {Button, Col, Modal, Row} from "react-bootstrap";
+import {Modal, Row} from "react-bootstrap";
 import {db} from "../db";
 import {useLiveQuery} from "dexie-react-hooks";
 import {useState} from "react";
@@ -14,7 +14,7 @@ const ArchivedCardsModal = (props) => {
 
     return (
         <>
-            <Modal fullscreen show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
+            <Modal scrollable show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
                 <Modal.Header closeButton>
                     <Modal.Title>Archived Cards</Modal.Title>
                 </Modal.Header>
@@ -23,7 +23,7 @@ const ArchivedCardsModal = (props) => {
                     <Row>
                         {
                             cards?.map(card => (
-                                <Row md={3} key={card.id}>
+                                <Row key={card.id}>
                                     <CardCard
                                         card={card}
                                         className={'m-2'}
