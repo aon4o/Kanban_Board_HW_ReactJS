@@ -7,7 +7,6 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import {Alert, Button, Dropdown} from "react-bootstrap";
 import {GiEvilLove} from "react-icons/gi";
-import Container from "react-bootstrap/Container";
 import {db} from "../../db";
 
 const NavBar = () => {
@@ -52,9 +51,20 @@ const NavBar = () => {
     return (
         <>
             <Navbar id={'navbar'} variant={'dark'} className={'fw-bolder'} sticky={'top'}>
-                <LinkContainer to="/">
-                    <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
-                </LinkContainer>
+                {auth.user ?
+                    <>
+                        <LinkContainer to="/profile">
+                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
+                        </LinkContainer>
+                    </>
+                    :
+                    <>
+                        <LinkContainer to="/">
+                            <Button className={'linkButtons fw-bolder'}><GiEvilLove fontSize={'24'} className={'me-1'}/>Umrello</Button>
+                        </LinkContainer>
+                    </>
+                }
+
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 
@@ -72,7 +82,7 @@ const NavBar = () => {
                                         split
                                         className={'linkButtons'}
                                         onFocus={() => setRefreshRecentBoards(refreshRecentBoards + 1)}
-                                    >Recent</Dropdown.Toggle>
+                                    >Recent </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
                                         {
@@ -96,9 +106,6 @@ const NavBar = () => {
 
                         {auth.user ?
                             <>
-                                <LinkContainer to="/profile">
-                                    <Button className={'linkButtons'}>Profile</Button>
-                                </LinkContainer>
                                 <Button className='linkButtons' onClick={logout}>Logout</Button>
                             </>
                             :

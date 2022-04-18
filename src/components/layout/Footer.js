@@ -19,7 +19,7 @@ const Footer = () => {
 
                 <div className="justify-content-center">
                     <span className={'text-light'}>
-                        Made by <a className="text-primary" href="https://www.linkedin.com/in/alex-naida/">Alex Naida</a> && <a className='text-primary' href='https://www.linkedin.com/in/kris-petrov/'>Yan Petrov</a>
+                        Made by <a className="text-primary" href="https://www.linkedin.com/in/alex-naida/">Alex Naida</a> && <a className='text-primary' href='https://www.linkedin.com/in/kris-petrov/'>Yan Petrov</a> && <a className={'text-primary'} href={'https://www.linkedin.com/in/stephanie-staykova-65917b210/'}>Steph Staykova</a>
                     </span>
                 </div>
 

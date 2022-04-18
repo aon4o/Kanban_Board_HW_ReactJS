@@ -46,10 +46,9 @@ const Profile = () => {
     return (
         <>
             <Container className={'my-5'}>
-                <Title>Profile - {auth.user.username}</Title>
-
+                <Title>Profile</Title>
                 <Row>
-                    <Col md={6}>
+                    <Col>
                         <h3 className={'text-center mb-4'}>My Boards</h3>
                         {
                             boards !== undefined && boards.length !== 0 && !loadingBoards ?
@@ -64,12 +63,13 @@ const Profile = () => {
                                 />
                         }
                     </Col>
-                    <Col md={6}>
+                    <Col className={'px-3'}>
                         <h3 className={'text-center mb-4'}>Tasks</h3>
                         {
                             cards !== undefined && cards.length !== 0 && !loadingCards ?
                                     cards.map(card => (
                                         <CardCard
+                                            className={'text-black my-2'}
                                             key={card.id}
                                             card={card}
                                             rerender={() => setRerenderCards(rerenderCards + 1)}
