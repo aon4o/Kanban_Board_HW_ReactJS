@@ -48,7 +48,8 @@ const CardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
+            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered
+                   size={'lg'}>
                 <Modal.Header closeButton>
                     <Modal.Title><MdVideoLabel size={'22'}/> {props.card.title}</Modal.Title>
                 </Modal.Header>
@@ -60,7 +61,8 @@ const CardModal = (props) => {
                             <div>
                                 {
                                     cardLabels?.map(label => (
-                                        <Badge  className={'mx-1'} bg={''} key={label.id} style={{backgroundColor: label.color}}>
+                                        <Badge className={'mx-1'} bg={''} key={label.id}
+                                               style={{backgroundColor: label.color}}>
                                             {label.title}
                                         </Badge>
                                     ))
@@ -77,9 +79,18 @@ const CardModal = (props) => {
                                 Creator:
                                 <br/>
                                 <Button
-                                    variant={'outline-dark mb-5'}
+                                    variant={'outline-dark'}
                                     className={'cardModal'}>
                                     {user?.username}
+                                </Button>
+                            </p>
+                            <p className={'text-muted fw-bold mb-5'}>
+                                Created At:
+                                <br/>
+                                <Button
+                                    variant={'outline-dark'}
+                                    className={'cardModal'}>
+                                    {props.card.created_at}
                                 </Button>
                             </p>
                             <p className={'text-muted fw-bold'}>Actions

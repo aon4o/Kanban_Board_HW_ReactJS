@@ -181,7 +181,7 @@ const CardModal = (props) => {
                                 Creator:
                                 <br/>
                                 <Button
-                                    variant={'outline-dark mb-5'}
+                                    variant={'outline-dark'}
                                     className={'cardModal'}>
                                     {user?.username}
                                 </Button>
@@ -190,12 +190,12 @@ const CardModal = (props) => {
                                 Created At:
                                 <br/>
                                 <Button
-                                    variant={'outline-dark mb-5'}
+                                    variant={'outline-dark'}
                                     className={'cardModal'}>
                                     {props.card.created_at}
                                 </Button>
                             </p>
-                            <p className={'text-muted fw-bold mb-4'}>
+                            <p className={'text-muted fw-bold mb-5'}>
                                 Assigned to:
                                 <Dropdown>
                                     <Dropdown.Toggle className={'dropdownMenu'}>
