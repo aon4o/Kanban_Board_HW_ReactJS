@@ -9,7 +9,7 @@ const BoardsTable = (props) => {
         <>
             {props.boards?.map(board => (
                 <>
-                    <Card className={props.className + ' text-light mb-3 text-center'}>
+                    <Card className={props.className + ' text-light mb-4 text-center'}>
                         <Card.Header className={'fw-bold bg-dark'}>
                             {board.name}
                         </Card.Header>
