@@ -1,12 +1,14 @@
 import {Button, Card, Stack} from "react-bootstrap";
 import {db} from "../../db";
-import {FaArrowLeft, FaArrowRight, FaEdit, FaPlus, FaTrash} from "react-icons/fa";
+import {FaArrowLeft, FaArrowRight, FaEdit, FaTrash} from "react-icons/fa";
 import {useEffect, useState} from "react";
 import AddCardModal from "../Card/AddCardModal";
 import CardCard from "../Card/CardCard";
 import DeleteColumnModal from "./DeleteColumnModal";
 import EditColumnModal from "./EditColumnModal";
 import {toast} from "react-toastify";
+import {AiOutlinePlus} from "react-icons/ai";
+import {RiMoreFill} from "react-icons/ri";
 
 
 const ColumnCard = (props) => {
@@ -78,60 +80,62 @@ const ColumnCard = (props) => {
 
     return (
         <>
-        <Card className={'scrollable-column'}>
-            <Card.Header>
-                <div className={'mb-1'}>
-                    {props.column.name}
-                </div>
+            <Card className={'scrollable-column columns'}>
+                <Card.Header className={'border-0 header'}>
+                    <div className={'mb-1 fw-bold d-flex justify-content-between align-items-center'}>
+                        {props.column.name}
+                        <Button variant={'outline-secondary'} className={'description'}><RiMoreFill/></Button>
+                    </div>
 
-                <Stack direction={"horizontal"} gap={2} className={'float-end'}>
-                    <Button variant={'outline-success'} size={'sm'} onClick={addCard}>
-                        <FaPlus/>
-                    </Button>
-                    <Button
-                        disabled={props.column.position === 1}
-                        variant={'outline-primary'}
-                        size={'sm'}
-                        onClick={moveColumnLeft}
-                    >
-                        <FaArrowLeft/>
-                    </Button>
-                    <Button
-                        variant={'outline-primary'}
-                        size={'sm'}
-                        onClick={moveColumnRight}
-                    >
-                        <FaArrowRight/>
-                    </Button>
-                    <Button variant={'outline-warning'} size={'sm'} onClick={editColumn}>
-                        <FaEdit/>
-                    </Button>
-                    <Button variant={'outline-danger'} size={'sm'} onClick={deleteColumn}>
-                        <FaTrash/>
-                    </Button>
-                </Stack>
-            </Card.Header>
-            <Card.Body>
-                <Stack gap={3}>
-                    {
-                        cards?.map(card => (
-                            <CardCard
-                                key={card.id}
-                                card={card}
-                                rerender={() => setRerenderColumn(rerenderColumn + 1)}
-                                rerenderBoard={props.rerender}
-                            />
-                        ))
-                    }
-                </Stack>
-            </Card.Body>
-        </Card>
+                    {/*<Stack direction={"horizontal"} gap={2} className={'float-end'}>*/}
+                    {/*    <Button*/}
+                    {/*        disabled={props.column.position === 1}*/}
+                    {/*        variant={'outline-primary'}*/}
+                    {/*        size={'sm'}*/}
+                    {/*        onClick={moveColumnLeft}*/}
+                    {/*    >*/}
+                    {/*        <FaArrowLeft/>*/}
+                    {/*    </Button>*/}
+                    {/*    <Button*/}
+                    {/*        variant={'outline-primary'}*/}
+                    {/*        size={'sm'}*/}
+                    {/*        onClick={moveColumnRight}*/}
+                    {/*    >*/}
+                    {/*        <FaArrowRight/>*/}
+                    {/*    </Button>*/}
+                    {/*    <Button variant={'outline-warning'} size={'sm'} onClick={editColumn}>*/}
+                    {/*        <FaEdit/>*/}
+                    {/*    </Button>*/}
+                    {/*    <Button variant={'outline-danger'} size={'sm'} onClick={deleteColumn}>*/}
+                    {/*        <FaTrash/>*/}
+                    {/*    </Button>*/}
+                    {/*</Stack>*/}
+                </Card.Header>
+                <Card.Body>
+                    <Stack gap={2}>
+                        {
+                            cards?.map(card => (
+                                <CardCard
+                                    key={card.id}
+                                    card={card}
+                                    rerender={() => setRerenderColumn(rerenderColumn + 1)}
+                                    rerenderBoard={props.rerender}
+                                />
+                            ))
+                        }
+                    </Stack>
+                </Card.Body>
+                <Button className={'text-start pb-2 px-3 addCard'} variant={'outline-secondary'} size={'sm'} onClick={addCard}>
+                    <AiOutlinePlus/> Add a card
+                </Button>
+            </Card>
 
             <AddCardModal
                 show={addCardModalShow}
                 onHide={() => setAddCardModalShow(false)}
                 column={props.column}
                 rerender={() => setRerenderColumn(rerenderColumn + 1)}
+                className={'text-black'}
             />
             <EditColumnModal
                 show={editColumnModalShow}

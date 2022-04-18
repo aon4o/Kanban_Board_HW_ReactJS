@@ -1,10 +1,10 @@
 import {Button, Card} from "react-bootstrap";
 import {useLiveQuery} from "dexie-react-hooks";
 import {db} from "../../db";
-import {FaExternalLinkAlt} from "react-icons/fa";
 import CardModal from "./CardModal";
 import {useState} from "react";
 import ArchivedCardModal from "./ArchivedCardModal";
+import {GrTextAlignFull} from "react-icons/gr";
 
 const CardCard = (props) => {
 
@@ -17,22 +17,20 @@ const CardCard = (props) => {
     return (
         <>
             <Card className={props.className}>
-                <Card.Header className={'d-flex justify-content-between'}>
+                <Card.Header className={'d-flex justify-content-between align-items-center flex-wrap'}>
                     {props.card.title}
                     <Button
-                        variant={'outline-primary'}
+                        className={'description'}
+                        variant={'outline-secondary'}
                         size={'sm'}
                         onClick={() => setShowCardModal(true)}
                     >
-                        <FaExternalLinkAlt/>
+                        <GrTextAlignFull/>
                     </Button>
+                    {/*<text  className={'text-muted small'}>Assigned By: {user?.username}</text>*/}
                 </Card.Header>
-                <Card.Body>
-                    {props.card.description}
-                </Card.Body>
-                <Card.Footer>
-                    {user?.username}
-                </Card.Footer>
+                {/*<Card.Footer>*/}
+                {/*</Card.Footer>*/}
             </Card>
 
             {
