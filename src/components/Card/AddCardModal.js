@@ -3,6 +3,7 @@ import {useContext, useState} from "react";
 import {db} from "../../db";
 import {toast} from "react-toastify";
 import authContext from "../../utils/authContext";
+import {CgClose} from "react-icons/cg";
 
 
 const AddCardModal = (props) => {
@@ -48,7 +49,7 @@ const AddCardModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createBoard}>
-                    <Modal.Header closeButton>
+                    <Modal.Header >
                         <Modal.Title>Add a Card</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -77,7 +78,7 @@ const AddCardModal = (props) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant={'primary'} type={'submit'}>Add</Button>
-                        <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
+                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

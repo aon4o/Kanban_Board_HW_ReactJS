@@ -42,10 +42,10 @@ const AddColumnModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createBoard}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className={'text-black'}>
                         <Modal.Title>Add a Column</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className={'text-black'}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Column Name"
@@ -60,7 +60,7 @@ const AddColumnModal = (props) => {
                             />
                         </FloatingLabel>
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className={'text-black'}>
                         <Button variant={'primary'} type={'submit'}>Add</Button>
                         <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
                     </Modal.Footer>

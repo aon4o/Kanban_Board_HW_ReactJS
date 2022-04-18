@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
 import EditCardModal from "./EditCardModal";
 import AddLabelModal from "../Label/AddLabelModal";
+import {CgClose} from "react-icons/cg";
 
 const CardModal = (props) => {
 
@@ -135,7 +136,7 @@ const CardModal = (props) => {
     return (
         <>
             <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>{props.card.title}</Modal.Title>
                 </Modal.Header>
 
@@ -230,7 +231,7 @@ const CardModal = (props) => {
                     <span>
                         Created by - {user?.username}
                     </span>
-                    <Button variant={'secondary'} onClick={props.onHide}>Close</Button>
+                    <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
                 </Modal.Footer>
             </Modal>
 

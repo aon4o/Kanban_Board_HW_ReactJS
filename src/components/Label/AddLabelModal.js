@@ -2,6 +2,7 @@ import {Button, FloatingLabel, Form, Modal} from "react-bootstrap";
 import {useState} from "react";
 import {db} from "../../db";
 import {toast} from "react-toastify";
+import {CgClose} from "react-icons/cg";
 
 
 const AddLabelModal = (props) => {
@@ -49,10 +50,10 @@ const AddLabelModal = (props) => {
         <>
             <Modal show={props.show} className={props.className} onHide={props.onHide} centered>
                 <Form onSubmit={createLabel}>
-                    <Modal.Header closeButton>
+                    <Modal.Header className={'text-black'}>
                         <Modal.Title>Add a Label</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className={'text-black'}>
                         <FloatingLabel
                             controlId="titleInput"
                             label="Title"
@@ -74,9 +75,9 @@ const AddLabelModal = (props) => {
                             title="Choose your color"
                         />
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className={'text-black'}>
                         <Button variant={'primary'} type={'submit'}>Add</Button>
-                        <Button variant={'secondary'} onClick={props.onHide}>Cancel</Button>
+                        <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
                     </Modal.Footer>
                 </Form>
             </Modal>
