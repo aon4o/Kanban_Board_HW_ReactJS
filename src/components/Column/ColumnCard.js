@@ -8,6 +8,7 @@ import EditColumnModal from "./EditColumnModal";
 import {toast} from "react-toastify";
 import {AiOutlinePlus} from "react-icons/ai";
 import {RiMoreFill} from "react-icons/ri";
+import ArchiveColumnModal from "./ArchiveColumnModal";
 
 
 const ColumnCard = (props) => {
@@ -17,6 +18,7 @@ const ColumnCard = (props) => {
     const [addCardModalShow, setAddCardModalShow] = useState(false);
     const [editColumnModalShow, setEditColumnModalShow] = useState(false);
     const [deleteColumnModalShow, setDeleteColumnModalShow] = useState(false);
+    const [archiveColumnModalShow, setArchiveColumnModalShow] = useState(false);
     const [rerenderColumn, setRerenderColumn] = useState(0);
 
     useEffect(() => {
@@ -77,6 +79,10 @@ const ColumnCard = (props) => {
         setDeleteColumnModalShow(true);
     }
 
+    const archiveColumn = () => {
+        setArchiveColumnModalShow(true);
+    }
+
     const popover = (
         <Popover>
             <Popover.Header className={'text-black'} as="h3">Actions</Popover.Header>
@@ -90,6 +96,9 @@ const ColumnCard = (props) => {
                     </ListGroup.Item>
                     <ListGroup.Item action onClick={editColumn}>
                         Edit Column
+                    </ListGroup.Item>
+                    <ListGroup.Item action onClick={archiveColumn}>
+                        Archive Column
                     </ListGroup.Item>
                     <ListGroup.Item action onClick={deleteColumn}>
                         Delete Column
@@ -146,6 +155,12 @@ const ColumnCard = (props) => {
             <DeleteColumnModal
                 show={deleteColumnModalShow}
                 onHide={() => setDeleteColumnModalShow(false)}
+                column={props.column}
+                rerenderBoard={() => props.rerenderBoard()}
+            />
+            <ArchiveColumnModal
+                show={archiveColumnModalShow}
+                onHide={() => setArchiveColumnModalShow(false)}
                 column={props.column}
                 rerenderBoard={() => props.rerenderBoard()}
             />
