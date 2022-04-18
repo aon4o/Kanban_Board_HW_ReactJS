@@ -20,6 +20,56 @@
     position: relative !important;
 }
 
+.card {
+    word-wrap: anywhere !important;
+    border: 0 !important;
+}
+
+.description {
+    border: 0 !important;
+}
+
+.description:focus {
+    box-shadow: none !important;
+}
+
+.description:hover {
+    background-color: #d9dce2!important;
+    color: black !important;
+}
+
+.addCard {
+    border: 0 !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    background-color: #ebecf0 !important;
+}
+
+.addCard:focus {
+    box-shadow: none !important;
+}
+
+.addCard:hover {
+    background-color: #ebecf0 !important;
+    color: black !important;
+}
+
+.header {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ebecf0 !important;
+    z-index: 1;
+}
+
+.columns {
+    color: black !important;
+    background-color: #ebecf0 !important;
+}
+
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
 body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -48,6 +98,9 @@ footer {
     background-color: #9f619a !important;
     border: none !important;
     color: white !important;
+    height: 42px !important;
+    width: 272px !important;
+    text-align: start !important;
 }
 
 .inputText:focus {
@@ -67,9 +120,6 @@ footer {
     user-select: none !important;
 }
 
-.columns {
-    color: black !important;
-}
 
 .linkButtons {
     background-color: #4126ab !important;
@@ -93,9 +143,10 @@ footer {
 }
 
 .scrollable-column {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     width: 18rem !important;
-    height: 40rem;
+    max-height: 20rem !important;
+    height: auto !important;
 }
 
 .bg-light-blue {

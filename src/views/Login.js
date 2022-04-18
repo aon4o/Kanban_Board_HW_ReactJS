@@ -29,7 +29,7 @@ const Home = () => {
 
             auth.setUser(user);
             toast.success(`You successfully logged in as '${username}'`);
-            navigate('/');
+            navigate('/profile');
         } catch (error) {
             toast.error(`${error}`)
         }
