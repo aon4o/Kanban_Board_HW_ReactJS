@@ -1,10 +1,9 @@
 import {Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
 import {db} from "../../db";
 import {useLiveQuery} from "dexie-react-hooks";
-import {FaArrowRight, FaTrash} from "react-icons/fa";
+import {FaArrowRight} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-import DeleteCardModal from "./DeleteCardModal";
 import {GrTextAlignFull} from "react-icons/gr";
 import {MdLabel, MdVideoLabel} from "react-icons/md";
 
@@ -12,7 +11,6 @@ const CardModal = (props) => {
 
     const [columns, setColumns] = useState(undefined);
     const [cardLabels, setCardLabels] = useState(undefined);
-    const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
 
     const user = useLiveQuery(() =>
         db.users.where({id: props.card.user_id}).first()
@@ -46,10 +44,6 @@ const CardModal = (props) => {
         } catch (error) {
             toast.error(error);
         }
-    }
-
-    const deleteCard = () => {
-        setShowDeleteCardModal(true);
     }
 
     return (
@@ -102,22 +96,11 @@ const CardModal = (props) => {
                                         }
                                     </Dropdown.Menu>
                                 </Dropdown>
-                                <Button variant={'outline-dark'} className={'cardModal mb-2'}
-                                        onClick={deleteCard}><FaTrash/> Delete
-                                </Button>
                             </p>
                         </Col>
                     </Row>
                 </Modal.Body>
             </Modal>
-
-            <DeleteCardModal
-                card={props.card}
-                show={showDeleteCardModal}
-                onHide={() => setShowDeleteCardModal(false)}
-                hideCardModal={props.onHide}
-                rerenderColumn={props.rerenderColumn}
-            />
         </>
     )
 }
