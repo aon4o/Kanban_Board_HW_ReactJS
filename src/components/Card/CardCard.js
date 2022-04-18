@@ -27,10 +27,8 @@ const CardCard = (props) => {
                     >
                         <GrTextAlignFull/>
                     </Button>
-                    {/*<text  className={'text-muted small'}>Assigned By: {user?.username}</text>*/}
                 </Card.Header>
-                {/*<Card.Footer>*/}
-                {/*</Card.Footer>*/}
+
             </Card>
 
             {

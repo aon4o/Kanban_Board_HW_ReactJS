@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import DeleteCardModal from "./DeleteCardModal";
 import EditCardModal from "./EditCardModal";
 import AddLabelModal from "../Label/AddLabelModal";
-import {CgClose} from "react-icons/cg";
+import {GrTextAlignFull} from "react-icons/gr";
 
 const CardModal = (props) => {
 
@@ -135,8 +135,9 @@ const CardModal = (props) => {
 
     return (
         <>
-            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered size={'lg'}>
-                <Modal.Header>
+            <Modal show={props.show} className={props.className + ' text-black'} onHide={props.onHide} centered
+                   size={'lg'}>
+                <Modal.Header closeButton>
                     <Modal.Title>{props.card.title}</Modal.Title>
                 </Modal.Header>
 
@@ -154,7 +155,8 @@ const CardModal = (props) => {
                                             {
                                                 boardLabels && boardLabels.length !== 0 ?
                                                     boardLabels.map(label => (
-                                                        <Dropdown.Item key={label.id} onClick={() => addLabelToCard(label)}>
+                                                        <Dropdown.Item key={label.id}
+                                                                       onClick={() => addLabelToCard(label)}>
                                                             {label.title}
                                                         </Dropdown.Item>
                                                     ))
@@ -163,7 +165,7 @@ const CardModal = (props) => {
                                                         There are no Labels for this Board yet!
                                                     </Alert>
                                             }
-                                            <Dropdown.Divider />
+                                            <Dropdown.Divider/>
                                             <Dropdown.Item onClick={addNewLabel}>Add New Label</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -179,13 +181,22 @@ const CardModal = (props) => {
                                 </div>
                             </div>
                             <div>
-                                <p>Description:</p>
-                                <p>{props.card.description}</p>
+                                <p><GrTextAlignFull size={'22'}/> Description:</p>
+                                <p className={' px-2 col-11 descriptionField'}>{props.card.description}</p>
                             </div>
                         </Col>
 
-                        <Col md={4} className={'d-flex flex-column gap-2'}>
-                            <p>
+                        <Col className={'d-flex flex-column'}>
+                            <p className={'text-muted fw-bold'}>
+                                Creator:
+                                <br/>
+                                <Button
+                                    variant={'outline-dark mb-5'}
+                                    className={'cardModal'}>
+                                    {user?.username}
+                                </Button>
+                            </p>
+                            <p className={'text-muted fw-bold mb-4'}>
                                 Assigned to:
                                 <Dropdown>
                                     <Dropdown.Toggle>
@@ -203,36 +214,34 @@ const CardModal = (props) => {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </p>
-                            <p>Actions</p>
-                            <Dropdown>
-                                <Dropdown.Toggle variant={"outline-secondary"}>
-                                    <FaArrowRight/> Move
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {
-                                        columns?.map(column => (
-                                            <Dropdown.Item key={column.id} onClick={() => moveCard(column)}>{column.name}</Dropdown.Item>
-                                        ))
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <Button variant={'outline-warning'} onClick={editCard}><FaEdit/> Edit</Button>
-                            <Button variant={'outline-danger'} onClick={deleteCard}><FaTrash/> Delete</Button>
-                            <Button
-                                variant={'outline-warning'}
-                                onClick={archiveCard}>
-                                <FaArchive/> Archive
-                            </Button>
+                            <p className={'text-muted fw-bold'}>Actions
+                                <Dropdown>
+                                    <Dropdown.Toggle variant={"outline-dark"} className={'cardModal mb-2'}>
+                                        <FaArrowRight/> Move
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        {
+                                            columns?.map(column => (
+                                                <Dropdown.Item key={column.id}
+                                                               onClick={() => moveCard(column)}>{column.name}</Dropdown.Item>
+                                            ))
+                                        }
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <Button variant={'outline-dark'} className={'cardModal mb-2'}
+                                        onClick={editCard}><FaEdit/> Edit</Button>
+                                <Button variant={'outline-dark'} className={'cardModal mb-2'}
+                                        onClick={deleteCard}><FaTrash/> Delete</Button>
+                                <Button
+                                    variant={'outline-dark'}
+                                    className={'cardModal mb-2'}
+                                    onClick={archiveCard}>
+                                    <FaArchive/> Archive
+                                </Button>
+                            </p>
                         </Col>
                     </Row>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <span>
-                        Created by - {user?.username}
-                    </span>
-                    <Button size={'lg'} className={'description'} variant={'outline-secondary'} onClick={props.onHide}><CgClose/></Button>
-                </Modal.Footer>
             </Modal>
 
             <EditCardModal

@@ -17,7 +17,6 @@
 }
 
 .homeImage {
-    background: gray;
     position: relative !important;
     bottom: 63.7% !important;
 }
@@ -45,7 +44,33 @@
 }
 
 .description:hover {
-    background-color: #d9dce2!important;
+    background-color: #d9dce2 !important;
+    color: black !important;
+}
+
+.descriptionField {
+    background-color: #ffffff !important;
+    min-height: 10vh !important;
+    border-radius: 3px;
+}
+
+.cardModal {
+    border: 0 !important;
+    background-color: #d9dce2 !important;
+    width: 168px !important;
+    text-align: start !important;
+}
+
+.cardModal::after {
+    content: none !important;
+}
+
+.cardModal:focus {
+    box-shadow: none !important;
+}
+
+.cardModal:hover {
+
     color: black !important;
 }
 
@@ -68,6 +93,14 @@
 .addCard:hover {
     background-color: #ebecf0 !important;
     color: black !important;
+}
+
+.modal-content {
+    background-color: #ebecf0 !important;
+}
+
+.modal-header {
+    border-bottom: none !important;
 }
 
 .dropdownMenu {

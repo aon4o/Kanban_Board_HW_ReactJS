@@ -121,7 +121,7 @@ const ColumnCard = (props) => {
                     {/*    </Button>*/}
                     {/*</Stack>*/}
                 </Card.Header>
-                <Card.Body className={'cardBody'}>
+                <Card.Body className={'cardBody '}>
                     <Stack gap={2}>
                         {
                             cards?.map(card => (
