@@ -1,6 +1,12 @@
 :root {
     --background: #a8b9ef;
     --white: white;
+    --black: black;
+    --transparent: transparent;
+
+    --light-gray: #b3b2b2;
+    --gray: gray;
+    --dark-gray: dimgray;
 
     --blue: #3863ff;
     --light-blue: #879dff;
@@ -11,6 +17,7 @@
 }
 
 .homeImage {
+    background: gray;
     position: relative !important;
     bottom: 63.7% !important;
 }
@@ -173,35 +180,38 @@ footer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 }
 
+/******************************/
+/* CHROMIUM SCROLLBARS STYLES */
+/******************************/
 ::-webkit-scrollbar {
-    width: 14px !important;
-    background-color: var(--background);
+    width: 10px !important;
+    background-color: var(--transparent);
 }
 
 ::-webkit-scrollbar-button {
-    background-color: var(--background);
+    background-color: var(--transparent);
     color: var(--white);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 15px !important;
-    box-shadow: inset 0 0 100px var(--blue) !important;
+    box-shadow: inset 0 0 100px var(--light-gray) !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 0 0 100px var(--light-blue) !important;
+    box-shadow: inset 0 0 100px var(--gray) !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    box-shadow: inset 0 0 100px var(--light-blue) !important;
+    box-shadow: inset 0 0 100px var(--dark-gray) !important;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--background);
+    background-color: var(--transparent);
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-corner {
-    background-color: var(--background);
+    background-color: var(--transparent);
 }

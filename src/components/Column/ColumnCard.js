@@ -80,7 +80,7 @@ const ColumnCard = (props) => {
 
     return (
         <>
-            <Card className={'scrollable-column columns'}>
+            <Card className={'scrollable-column columns mb-3'}>
                 <Card.Header className={'border-0 header'}>
                     <div className={'mb-1 fw-bold d-flex justify-content-between align-items-center'}>
                         {props.column.name}
