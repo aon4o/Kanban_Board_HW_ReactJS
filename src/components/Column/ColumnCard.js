@@ -1,6 +1,5 @@
-import {Button, Card, Stack} from "react-bootstrap";
+import {Button, Card, OverlayTrigger, Popover, Stack} from "react-bootstrap";
 import {db} from "../../db";
-import {FaArrowLeft, FaArrowRight, FaEdit, FaTrash} from "react-icons/fa";
 import {useEffect, useState} from "react";
 import AddCardModal from "../Card/AddCardModal";
 import CardCard from "../Card/CardCard";
@@ -78,13 +77,24 @@ const ColumnCard = (props) => {
         setDeleteColumnModalShow(true);
     }
 
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Header as="h3">Popover right</Popover.Header>
+            <Popover.Body>
+                {/*    Insert body here*/}
+            </Popover.Body>
+        </Popover>
+    )
+
     return (
         <>
             <Card className={'scrollable-column columns mb-3'}>
                 <Card.Header className={'border-0 header'}>
                     <div className={'mb-1 fw-bold d-flex justify-content-between align-items-center'}>
                         {props.column.name}
-                        <Button variant={'outline-secondary'} className={'description'}><RiMoreFill/></Button>
+                        <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                            <Button variant="outline-secondary" className={'description'}><RiMoreFill/></Button>
+                        </OverlayTrigger>
                     </div>
 
                     {/*<Stack direction={"horizontal"} gap={2} className={'float-end'}>*/}
@@ -111,7 +121,7 @@ const ColumnCard = (props) => {
                     {/*    </Button>*/}
                     {/*</Stack>*/}
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className={'cardBody'}>
                     <Stack gap={2}>
                         {
                             cards?.map(card => (
@@ -125,7 +135,8 @@ const ColumnCard = (props) => {
                         }
                     </Stack>
                 </Card.Body>
-                <Button className={'text-start pb-2 px-3 addCard'} variant={'outline-secondary'} size={'sm'} onClick={addCard}>
+                <Button className={'text-start pb-2 px-3 addCard'} variant={'outline-secondary'} size={'sm'}
+                        onClick={addCard}>
                     <AiOutlinePlus/> Add a card
                 </Button>
             </Card>

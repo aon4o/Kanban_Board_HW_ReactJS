@@ -36,6 +36,10 @@
     border: 0 !important;
 }
 
+.description::after {
+    content: none !important;
+}
+
 .description:focus {
     box-shadow: none !important;
 }
@@ -50,6 +54,11 @@
     position: sticky !important;
     bottom: 0 !important;
     background-color: #ebecf0 !important;
+    z-index: 1 !important;
+}
+
+.cardBody {
+    z-index: 0 !important;
 }
 
 .addCard:focus {
@@ -61,11 +70,15 @@
     color: black !important;
 }
 
+.dropdownMenu {
+    /*overflow-y: visible !important;*/
+}
+
 .header {
     position: sticky !important;
     top: 0 !important;
     background-color: #ebecf0 !important;
-    z-index: 1;
+    z-index: 1 !important;
 }
 
 .columns {
