@@ -1,4 +1,4 @@
-import {Button, Card, OverlayTrigger, Popover, Stack} from "react-bootstrap";
+import {Button, Card, ListGroup, OverlayTrigger, Popover, Stack} from "react-bootstrap";
 import {db} from "../../db";
 import {useEffect, useState} from "react";
 import AddCardModal from "../Card/AddCardModal";
@@ -78,10 +78,23 @@ const ColumnCard = (props) => {
     }
 
     const popover = (
-        <Popover id="popover-basic">
-            <Popover.Header as="h3">Popover right</Popover.Header>
-            <Popover.Body>
-                {/*    Insert body here*/}
+        <Popover>
+            <Popover.Header className={'text-black'} as="h3">Actions</Popover.Header>
+            <Popover.Body className={'p-0'}>
+                <ListGroup>
+                    <ListGroup.Item action onClick={moveColumnLeft}>
+                        Move Column Left
+                    </ListGroup.Item>
+                    <ListGroup.Item action onClick={moveColumnRight}>
+                        Move Column Right
+                    </ListGroup.Item>
+                    <ListGroup.Item action onClick={editColumn}>
+                        Edit Column
+                    </ListGroup.Item>
+                    <ListGroup.Item action onClick={deleteColumn}>
+                        Delete Column
+                    </ListGroup.Item>
+                </ListGroup>
             </Popover.Body>
         </Popover>
     )
@@ -92,34 +105,10 @@ const ColumnCard = (props) => {
                 <Card.Header className={'border-0 header'}>
                     <div className={'mb-1 fw-bold d-flex justify-content-between align-items-center'}>
                         {props.column.name}
-                        <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                        <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
                             <Button variant="outline-secondary" className={'description'}><RiMoreFill/></Button>
                         </OverlayTrigger>
                     </div>
-
-                    {/*<Stack direction={"horizontal"} gap={2} className={'float-end'}>*/}
-                    {/*    <Button*/}
-                    {/*        disabled={props.column.position === 1}*/}
-                    {/*        variant={'outline-primary'}*/}
-                    {/*        size={'sm'}*/}
-                    {/*        onClick={moveColumnLeft}*/}
-                    {/*    >*/}
-                    {/*        <FaArrowLeft/>*/}
-                    {/*    </Button>*/}
-                    {/*    <Button*/}
-                    {/*        variant={'outline-primary'}*/}
-                    {/*        size={'sm'}*/}
-                    {/*        onClick={moveColumnRight}*/}
-                    {/*    >*/}
-                    {/*        <FaArrowRight/>*/}
-                    {/*    </Button>*/}
-                    {/*    <Button variant={'outline-warning'} size={'sm'} onClick={editColumn}>*/}
-                    {/*        <FaEdit/>*/}
-                    {/*    </Button>*/}
-                    {/*    <Button variant={'outline-danger'} size={'sm'} onClick={deleteColumn}>*/}
-                    {/*        <FaTrash/>*/}
-                    {/*    </Button>*/}
-                    {/*</Stack>*/}
                 </Card.Header>
                 <Card.Body className={'cardBody '}>
                     <Stack gap={2}>
@@ -152,13 +141,13 @@ const ColumnCard = (props) => {
                 show={editColumnModalShow}
                 onHide={() => setEditColumnModalShow(false)}
                 column={props.column}
-                rerender={() => props.rerender(props.rerenderer + 1)}
+                rerender={() => props.rerender()}
             />
             <DeleteColumnModal
                 show={deleteColumnModalShow}
                 onHide={() => setDeleteColumnModalShow(false)}
                 column={props.column}
-                rerender={() => props.rerender(props.rerenderer + 1)}
+                rerender={() => props.rerender()}
             />
         </>
     )
