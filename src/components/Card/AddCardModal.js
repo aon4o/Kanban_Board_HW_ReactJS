@@ -28,12 +28,16 @@ const AddCardModal = (props) => {
                 throw new Error("Card description must be at least 3 symbols!")
             }
 
+            const date = new Date();
+            const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+
             await db.cards.add({
                 title: title,
                 description: description,
                 user_id: auth.user.id,
                 column_id: props.column.id,
-                board_id: props.column.board_id
+                board_id: props.column.board_id,
+                created_at: dateString
             });
 
             toast.success(`Card '${title}' added successfully!`);

@@ -1,10 +1,9 @@
-import {Alert, Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
+import {Badge, Button, Col, Dropdown, Modal, Row} from "react-bootstrap";
 import {db} from "../../db";
 import {useLiveQuery} from "dexie-react-hooks";
-import {FaArchive, FaArrowRight, FaEdit, FaPlus, FaTrash} from "react-icons/fa";
+import {FaArchive, FaArrowRight, FaEdit} from "react-icons/fa";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-import DeleteCardModal from "./DeleteCardModal";
 import EditCardModal from "./EditCardModal";
 import AddLabelModal from "../Label/AddLabelModal";
 import {GrTextAlignFull} from "react-icons/gr";
@@ -15,10 +14,8 @@ const CardModal = (props) => {
 
     const [columns, setColumns] = useState(undefined);
     const [cardLabels, setCardLabels] = useState(undefined);
-    const [boardLabels, setBoardLabels] = useState(undefined);
     const [users, setUsers] = useState(undefined);
     const [cardAssignee, setCardAssignee] = useState({username: "Nobody"});
-    const [showDeleteCardModal, setShowDeleteCardModal] = useState(false);
     const [showEditCardModal, setShowEditCardModal] = useState(false);
     const [showAddNewLabelModal, setShowAddNewLabelModal] = useState(false);
 
@@ -42,10 +39,6 @@ const CardModal = (props) => {
                     .then(setCardLabels)
                     .catch(toast.error);
             })
-            .catch(toast.error);
-
-        db.labels.where({board_id: props.card.board_id}).toArray()
-            .then(setBoardLabels)
             .catch(toast.error);
 
         if (props.card.assignee_id) {
@@ -74,10 +67,6 @@ const CardModal = (props) => {
 
     const editCard = () => {
         setShowEditCardModal(true);
-    }
-
-    const deleteCard = () => {
-        setShowDeleteCardModal(true);
     }
 
     const archiveCard = () => {
@@ -165,8 +154,8 @@ const CardModal = (props) => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu className={'dropdownItem'}>
                                             {
-                                                boardLabels && boardLabels.length !== 0 ?
-                                                    boardLabels.map(label => (
+                                                props.labels && props.labels.length !== 0 ?
+                                                    props.labels.map(label => (
                                                         <Dropdown.Item className={'dropdownItem'} key={label.id}
                                                                        onClick={() => addLabelToCard(label)}>
                                                             {label.title}
@@ -195,6 +184,15 @@ const CardModal = (props) => {
                                     variant={'outline-dark mb-5'}
                                     className={'cardModal'}>
                                     {user?.username}
+                                </Button>
+                            </p>
+                            <p className={'text-muted fw-bold'}>
+                                Created At:
+                                <br/>
+                                <Button
+                                    variant={'outline-dark mb-5'}
+                                    className={'cardModal'}>
+                                    {props.card.created_at}
                                 </Button>
                             </p>
                             <p className={'text-muted fw-bold mb-4'}>
@@ -234,9 +232,6 @@ const CardModal = (props) => {
                                 </Dropdown>
                                 <Button variant={'outline-dark'} className={'cardModal mb-2'}
                                         onClick={editCard}><FaEdit/> Edit</Button>
-                                <Button variant={'outline-dark'} className={'cardModal mb-2'}
-                                        onClick={deleteCard}><FaTrash/> Delete
-                                </Button>
                                 <Button
                                     variant={'outline-dark'}
                                     className={'cardModal mb-2'}
@@ -255,21 +250,11 @@ const CardModal = (props) => {
                 onHide={() => setShowEditCardModal(false)}
                 rerenderColumn={props.rerenderColumn}
             />
-
-            <DeleteCardModal
-                card={props.card}
-                show={showDeleteCardModal}
-                onHide={() => setShowDeleteCardModal(false)}
-                hideCardModal={props.onHide}
-                rerenderColumn={props.rerenderColumn}
-            />
-
             <AddLabelModal
                 card={props.card}
                 show={showAddNewLabelModal}
                 onHide={() => setShowAddNewLabelModal(false)}
-                rerenderCard={props.rerenderCard}
-                rerenderColumn={props.rerenderColumn}
+                rerenderLabels={props.rerenderLabels}
             />
         </>
     )

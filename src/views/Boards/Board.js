@@ -20,10 +20,12 @@ const Board = () => {
 
     const [board, setBoard] = useState(undefined);
     const [columns, setColumns] = useState(undefined);
+    const [labels, setLabels] = useState(undefined);
     const [loadingColumns, setLoadingColumns] = useState(true);
     const [addColumnModalShow, setAddColumnModalShow] = useState(false);
     const [archivedCardsModalShow, setArchivedCardsModalShow] = useState(false);
     const [rerenderColumns, setRerenderColumns] = useState(0);
+    const [rerenderLabels, setRerenderLabels] = useState(0);
 
     useEffect(() => {
         if (!auth.user) {
@@ -36,7 +38,13 @@ const Board = () => {
         db.boards.where({name: name}).first()
             .then(setBoard)
             .catch(toast.error);
-    }, [name, rerenderColumns])
+    }, [name, rerenderColumns]);
+
+    useEffect(() => {
+        db.labels.where({board_id: board?.id}).toArray()
+            .then(setLabels)
+            .catch(toast.error);
+    }, [board, rerenderLabels]);
 
     const getRecentBoards = async () => {
         await db.recent
@@ -89,7 +97,9 @@ const Board = () => {
                                 columns?.map(column => (
                                     <ColumnCard key={column.id}
                                                 column={column}
+                                                labels={labels}
                                                 rerenderBoard={() => setRerenderColumns(rerenderColumns + 1)}
+                                                rerenderLabels={() => setRerenderLabels(rerenderLabels + 1)}
                                     />
                                 ))
                             }

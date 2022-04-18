@@ -38,7 +38,7 @@ const AddLabelModal = (props) => {
             });
 
             toast.success(`Label '${title}' added successfully!`);
-            props.rerenderColumn();
+            props.rerenderLabels();
             props.onHide();
         } catch (error) {
             console.log(error)
