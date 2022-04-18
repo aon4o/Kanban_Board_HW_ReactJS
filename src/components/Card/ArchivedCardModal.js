@@ -112,7 +112,7 @@ const CardModal = (props) => {
                 show={showDeleteCardModal}
                 onHide={() => setShowDeleteCardModal(false)}
                 hideCardModal={props.onHide}
-                rerender={props.rerender}
+                rerenderColumn={props.rerenderColumn}
             />
         </>
     )

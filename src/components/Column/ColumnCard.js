@@ -42,7 +42,7 @@ const ColumnCard = (props) => {
                 .where({name: column.name, board_id: column.board_id})
                 .modify({position: column.position - 1});
 
-            await props.rerender();
+            await props.rerenderBoard();
         } catch (e) {
             toast.error(e);
         }
@@ -63,7 +63,7 @@ const ColumnCard = (props) => {
                 .where({name: column.name, board_id: column.board_id})
                 .modify({position: column.position + 1});
 
-            await props.rerender();
+            await props.rerenderBoard();
         } catch (e) {
             toast.error(e);
         }
@@ -117,8 +117,8 @@ const ColumnCard = (props) => {
                                 <CardCard
                                     key={card.id}
                                     card={card}
-                                    rerender={() => setRerenderColumn(rerenderColumn + 1)}
-                                    rerenderBoard={props.rerender}
+                                    rerenderColumn={() => setRerenderColumn(rerenderColumn + 1)}
+                                    rerenderBoard={props.rerenderBoard}
                                 />
                             ))
                         }
@@ -134,20 +134,20 @@ const ColumnCard = (props) => {
                 show={addCardModalShow}
                 onHide={() => setAddCardModalShow(false)}
                 column={props.column}
-                rerender={() => setRerenderColumn(rerenderColumn + 1)}
+                rerenderColumn={() => setRerenderColumn(rerenderColumn + 1)}
                 className={'text-black'}
             />
             <EditColumnModal
                 show={editColumnModalShow}
                 onHide={() => setEditColumnModalShow(false)}
                 column={props.column}
-                rerender={() => props.rerender()}
+                rerenderBoard={() => props.rerenderBoard()}
             />
             <DeleteColumnModal
                 show={deleteColumnModalShow}
                 onHide={() => setDeleteColumnModalShow(false)}
                 column={props.column}
-                rerender={() => props.rerender()}
+                rerenderBoard={() => props.rerenderBoard()}
             />
         </>
     )

@@ -28,8 +28,8 @@ const ArchivedCardsModal = (props) => {
                                         card={card}
                                         className={'mb-3'}
                                         archived
-                                        rerender={() => setRerenderArchive(rerenderArchive + 1)}
-                                        rerenderBoard={props.rerender}
+                                        rerenderArchive={() => setRerenderArchive(rerenderArchive + 1)}
+                                        rerenderBoard={props.rerenderBoard}
                                     />
                                 </Col>
                             ))

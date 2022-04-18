@@ -14,7 +14,7 @@ const DeleteColumnModal = (props) => {
                 .above(props.column.position)
                 .modify(column => column.position -= 1);
             toast.success(`Column '${props.column.name}' deleted successfully with ${deletedCards} cards!`);
-            props.rerender();
+            props.rerenderBoard();
             props.onHide();
         } catch (error) {
             toast.error(error);

@@ -32,7 +32,7 @@ const EditColumnModal = (props) => {
 
             toast.success(`Column '${oldColumnName}' renamed successfully to '${newColumnName}'!`);
             props.onHide();
-            props.rerender();
+            props.rerenderBoard();
         } catch (error) {
             console.log(error)
             toast.error(`${error}`);

@@ -32,7 +32,7 @@ const EditCardModal = (props) => {
             });
 
             toast.success(`Card '${title}' edited successfully!`);
-            props.rerender();
+            props.rerenderColumn();
             props.onHide();
         } catch (error) {
             console.log(error)

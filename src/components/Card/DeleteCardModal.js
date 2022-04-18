@@ -11,7 +11,7 @@ const DeleteCardModal = (props) => {
             toast.success(`Card '${props.card.title}' deleted successfully!`);
             props.onHide();
             props.hideCardModal();
-            props.rerender();
+            props.rerenderColumn();
         } catch (error) {
             toast.error(error);
         }

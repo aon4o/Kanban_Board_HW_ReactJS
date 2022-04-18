@@ -1,24 +1,42 @@
-import {Button, Card} from "react-bootstrap";
-import {useLiveQuery} from "dexie-react-hooks";
+import {Badge, Button, Card} from "react-bootstrap";
 import {db} from "../../db";
 import CardModal from "./CardModal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ArchivedCardModal from "./ArchivedCardModal";
 import {GrTextAlignFull} from "react-icons/gr";
+import {toast} from "react-toastify";
 
 const CardCard = (props) => {
 
+    const [labels, setLabels] = useState(undefined);
     const [showCardModal, setShowCardModal] = useState(false);
+    const [rerenderCard, setRerenderCard] = useState(0);
 
-    const user = useLiveQuery(() =>
-        db.users.where({id: props.card.user_id}).first()
-    )
+    useEffect(() => {
+        db.card_labels.where({card_id: props.card.id}).toArray()
+            .then(cardLabels => {
+                const cardLabelIds = [];
+                cardLabels.map(cardLabel => cardLabelIds.push(cardLabel.label_id));
+                db.labels.bulkGet(cardLabelIds)
+                    .then(setLabels)
+                    .catch(toast.error);
+            })
+            .catch(toast.error);
+    }, [props.card])
 
     return (
         <>
             <Card className={props.className}>
-                <Card.Header className={'d-flex justify-content-between align-items-center flex-wrap'}>
-                    {props.card.title}
+                <Card.Body className={'d-flex px-3 py-2 justify-content-between align-items-center'}>
+                    <div>
+                        {
+                            labels?.map(label => (
+                                <Badge pill bg="" style={{backgroundColor: label.color}}>{' '}</Badge>
+                            ))
+                        }
+                        {props.card.title}
+                    </div>
+
                     <Button
                         className={'description'}
                         variant={'outline-secondary'}
@@ -27,8 +45,7 @@ const CardCard = (props) => {
                     >
                         <GrTextAlignFull/>
                     </Button>
-                </Card.Header>
-
+                </Card.Body>
             </Card>
 
             {
@@ -38,7 +55,7 @@ const CardCard = (props) => {
                         card={props.card}
                         show={showCardModal}
                         onHide={() => setShowCardModal(false)}
-                        rerender={props.rerender}
+                        rerenderColumn={props.rerenderColumn}
                         rerenderBoard={props.rerenderBoard}
                     />
                     :
@@ -46,7 +63,8 @@ const CardCard = (props) => {
                         card={props.card}
                         show={showCardModal}
                         onHide={() => setShowCardModal(false)}
-                        rerender={props.rerender}
+                        rerenderCard={() => setRerenderCard(rerenderCard + 1)}
+                        rerenderColumn={props.rerenderColumn}
                         rerenderBoard={props.rerenderBoard}
                     />
             }

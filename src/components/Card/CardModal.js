@@ -81,7 +81,7 @@ const CardModal = (props) => {
     const archiveCard = () => {
         try {
             db.cards.where({id: props.card.id}).modify({column_id: 'archived'});
-            props.rerender();
+            props.rerenderColumn();
             toast.success(`Card '${props.card.title}' successfully archived!`);
         } catch (error) {
             toast.error(error);
@@ -107,7 +107,7 @@ const CardModal = (props) => {
             })
 
             toast.success(`Label '${label.title}' successfully added to Card '${props.card.title}'.`)
-            props.rerender();
+            props.rerenderColumn();
         } catch (error) {
             toast.error(error);
         }
@@ -118,7 +118,7 @@ const CardModal = (props) => {
             .modify({assignee_id: user.id})
             .then(() => {
                 toast.success(`User '${user.username}' assigned to Card '${props.card.title}' successfully!`);
-                props.rerender();
+                props.rerenderColumn();
             })
             .catch(toast.error);
     }
@@ -128,7 +128,7 @@ const CardModal = (props) => {
             .modify({assignee_id: undefined})
             .then(() => {
                 toast.success(`Assignee removed on Card '${props.card.title}' successfully!`);
-                props.rerender();
+                props.rerenderColumn();
             })
             .catch(toast.error);
     }
@@ -248,7 +248,7 @@ const CardModal = (props) => {
                 card={props.card}
                 show={showEditCardModal}
                 onHide={() => setShowEditCardModal(false)}
-                rerender={props.rerender}
+                rerenderColumn={props.rerenderColumn}
             />
 
             <DeleteCardModal
@@ -256,14 +256,15 @@ const CardModal = (props) => {
                 show={showDeleteCardModal}
                 onHide={() => setShowDeleteCardModal(false)}
                 hideCardModal={props.onHide}
-                rerender={props.rerender}
+                rerenderColumn={props.rerenderColumn}
             />
 
             <AddLabelModal
                 card={props.card}
                 show={showAddNewLabelModal}
                 onHide={() => setShowAddNewLabelModal(false)}
-                rerender={props.rerender}
+                rerenderCard={props.rerenderCard}
+                rerenderColumn={props.rerenderColumn}
             />
         </>
     )

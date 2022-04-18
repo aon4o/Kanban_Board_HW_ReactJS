@@ -89,7 +89,7 @@ const Board = () => {
                                 columns?.map(column => (
                                     <ColumnCard key={column.id}
                                                 column={column}
-                                                rerender={() => setRerenderColumns(rerenderColumns + 1)}
+                                                rerenderBoard={() => setRerenderColumns(rerenderColumns + 1)}
                                     />
                                 ))
                             }
@@ -120,7 +120,7 @@ const Board = () => {
                 show={addColumnModalShow}
                 onHide={() => setAddColumnModalShow(false)}
                 board_id={board?.id}
-                rerender={() => setRerenderColumns(rerenderColumns + 1)}
+                rerenderBoard={() => setRerenderColumns(rerenderColumns + 1)}
             />
 
             {
@@ -129,7 +129,7 @@ const Board = () => {
                     show={archivedCardsModalShow}
                     onHide={() => setArchivedCardsModalShow(false)}
                     board_id={board?.id}
-                    rerender={() => setRerenderColumns(rerenderColumns + 1)}
+                    rerenderBoard={() => setRerenderColumns(rerenderColumns + 1)}
                 />
             }
 
