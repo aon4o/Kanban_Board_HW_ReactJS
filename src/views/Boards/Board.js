@@ -81,7 +81,7 @@ const Board = () => {
 
     return (
         <>
-            <Container className={'mt-5'}>
+            <Container className={'visually-hidden'}>
                 <Row>
                     <Col>
                         <Title>{name}</Title>
@@ -91,7 +91,7 @@ const Board = () => {
 
             {
                 columns !== undefined && columns.length !== 0 && !loadingColumns ?
-                    <Container fluid className={'px-4 d-flex align-items-stretch'}>
+                    <Container fluid className={'px-4 d-flex align-items-stretch mt-3'}>
                         <Row className={'flex-nowrap gap-3 scrollable-board flex-grow-1'}>
                             {
                                 columns?.map(column => (
