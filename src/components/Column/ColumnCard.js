@@ -111,8 +111,8 @@ const ColumnCard = (props) => {
     return (
         <>
             <Card className={'scrollable-column columns mb-3'}>
-                <Card.Header className={'border-0 header'}>
-                    <div className={'mb-1 fw-bold d-flex justify-content-between align-items-center'}>
+                <Card.Header className={'border-0 header cardTitle'}>
+                    <div className={'mb-1 d-flex justify-content-between align-items-center'}>
                         {props.column.name}
                         <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
                             <Button variant="outline-secondary" className={'description'}><RiMoreFill/></Button>

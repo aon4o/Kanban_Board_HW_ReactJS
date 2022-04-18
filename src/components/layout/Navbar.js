@@ -8,6 +8,7 @@ import {useNavigate} from "react-router";
 import {Alert, Button, Dropdown} from "react-bootstrap";
 import {GiEvilLove} from "react-icons/gi";
 import {db} from "../../db";
+import {FiChevronDown} from "react-icons/fi";
 
 const NavBar = () => {
     const auth = useContext(authContext);
@@ -82,7 +83,7 @@ const NavBar = () => {
                                         split
                                         className={'linkButtons'}
                                         onFocus={() => setRefreshRecentBoards(refreshRecentBoards + 1)}
-                                    >Recent </Dropdown.Toggle>
+                                    >Recent  <FiChevronDown size={20} className={'pb-1'}/></Dropdown.Toggle>
 
                                     <Dropdown.Menu>
                                         {
@@ -106,7 +107,7 @@ const NavBar = () => {
 
                         {auth.user ?
                             <>
-                                <Button className='linkButtons' onClick={logout}>Logout</Button>
+                                <Button className='linkButtons mb-1' onClick={logout}>Logout</Button>
                             </>
                             :
                             <>

@@ -32,7 +32,7 @@ const CardCard = (props) => {
                         <Stack direction={"horizontal"} gap={1}>
                             {
                                 labels?.map(label => (
-                                    <Badge pill bg="" style={{backgroundColor: label.color}}>{' '}</Badge>
+                                    <Badge pill className={'badger'} bg="" style={{backgroundColor: label.color}}>{' '}</Badge>
                                 ))
                             }
                         </Stack>
