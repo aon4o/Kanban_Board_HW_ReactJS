@@ -31,7 +31,9 @@ const Profile = () => {
 
     useEffect(() => {
         db.boards.where({user_id: auth.user.id}).toArray()
-            .then(result => {setBoards(result)})
+            .then(result => {
+                setBoards(result)
+            })
             .catch(error => toast.error(error))
             .finally(() => setLoadingBoards(false));
     }, [auth.user, rerenderBoards]);
@@ -46,9 +48,11 @@ const Profile = () => {
     return (
         <>
             <Container className={'my-5'}>
-                <Title>Profile</Title>
-                <Row>
-                    <Col>
+                <div className={'visually-hidden'}>
+                    <Title>Profile</Title>
+                </div>
+                <Row className={'d-flex justify-content-center'}>
+                    <Col className={'col-4'}>
                         <h3 className={'text-center mb-4'}>My Boards</h3>
                         {
                             boards !== undefined && boards.length !== 0 && !loadingBoards ?
@@ -63,18 +67,18 @@ const Profile = () => {
                                 />
                         }
                     </Col>
-                    <Col className={'px-3'}>
+                    <Col className={'px-3 col-5'}>
                         <h3 className={'text-center mb-4'}>Tasks</h3>
                         {
                             cards !== undefined && cards.length !== 0 && !loadingCards ?
-                                    cards.map(card => (
-                                        <CardCard
-                                            className={'text-black my-2'}
-                                            key={card.id}
-                                            card={card}
-                                            rerender={() => setRerenderCards(rerenderCards + 1)}
-                                        />
-                                    ))
+                                cards.map(card => (
+                                    <CardCard
+                                        className={'text-black my-2'}
+                                        key={card.id}
+                                        card={card}
+                                        rerender={() => setRerenderCards(rerenderCards + 1)}
+                                    />
+                                ))
                                 :
                                 <Loading
                                     loading={loadingCards}

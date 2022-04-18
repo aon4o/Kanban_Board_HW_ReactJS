@@ -99,6 +99,11 @@
     background-color: #ebecf0 !important;
 }
 
+.boardsTable {
+    width: 70vw !important;
+    height: fit-content !important;
+}
+
 .form-control {
     word-wrap: anywhere !important;
 }

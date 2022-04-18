@@ -1,27 +1,24 @@
-import {Table} from "react-bootstrap";
-import BoardRow from "./BoardRow";
+import {Card} from "react-bootstrap";
+import BoardCardButtons from "./BoardCardButtons";
+
 
 const BoardsTable = (props) => {
 
+
     return (
         <>
-            <Table striped borderless hover variant={'primary'} className={'text-center shadow-mine rounded-mine'}>
-                <thead>
-                <tr>
-                    <th>Board</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {props.boards?.map(board => (
-                    <BoardRow
-                        key={board.id}
-                        board={board}
-                        rerender={props.rerender}
-                    />
-                ))}
-                </tbody>
-            </Table>
+            {props.boards?.map(board => (
+                <>
+                    <Card className={props.className + ' text-light mb-3 text-center'}>
+                        <Card.Header className={'fw-bold bg-dark'}>
+                            {board.name}
+                        </Card.Header>
+                        <Card.Body className={'d-flex justify-content-around'}>
+                            <BoardCardButtons key={board.id} board={board} rerender={props.rerender}></BoardCardButtons>
+                        </Card.Body>
+                    </Card>
+                </>
+            ))}
         </>
     )
 

@@ -28,7 +28,9 @@ const Boards = () => {
 
     useEffect(() => {
         db.boards.toArray()
-            .then(result => {setBoards(result)})
+            .then(result => {
+                setBoards(result)
+            })
             .catch(error => toast.error(error))
             .finally(() => setLoading(false));
     }, [rerender]);
@@ -47,20 +49,21 @@ const Boards = () => {
                             </Button>
                         </div>
                     </Col>
-                    <Col>
-                        {
-                            boards !== undefined && boards.length !== 0 && !loading ?
-                                <BoardsTable
-                                    boards={boards}
-                                    rerender={() => setRerender(rerender + 1)}
-                                />
-                                :
-                                <Loading
-                                    loading={loading}
-                                    message={"There is no boards."}
-                                />
-                        }
-                    </Col>
+                </Row>
+                <Row className={'d-flex justify-content-around gap-4 flex-row flex-wrap boardsTable'}>
+                            {
+                                boards !== undefined && boards.length !== 0 && !loading ?
+                                    <BoardsTable
+                                        className={'col-3'}
+                                        boards={boards}
+                                        rerender={() => setRerender(rerender + 1)}
+                                    />
+                                    :
+                                    <Loading
+                                        loading={loading}
+                                        message={"There is no boards."}
+                                    />
+                            }
                 </Row>
 
                 <CreateBoardModal

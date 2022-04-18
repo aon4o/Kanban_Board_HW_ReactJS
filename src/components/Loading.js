@@ -11,7 +11,7 @@ const Loading = (props) => {
                         <Spinner animation="border" variant={'primary'} />
                     </div>
                     :
-                    <Alert variant={'info'} className={'text-center'}>
+                    <Alert variant={'secondary'} className={'text-center text-dark'}>
                         <Alert.Heading className={'mb-0'}>
                             {
                                 props.message ?
